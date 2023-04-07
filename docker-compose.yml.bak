@@ -1,0 +1,16 @@
+version: '3'
+services:
+ checklist-web:
+   image: checklist-web
+ nginx:
+    build:
+      context: .
+      #target: runtime-nginx
+      dockerfile: nginx/Dockerfile
+    image: nginx
+   #networks:
+    # - redelocal
+    ports:
+       - 8081:8081
+    volumes:
+      - ./:/etc/nginx

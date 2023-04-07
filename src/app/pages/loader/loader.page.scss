@@ -1,0 +1,23 @@
+ion-content{
+  --background: white;
+  --color:white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vw;
+
+}
+.spinner{
+  margin: auto;
+  margin-top: 70%;
+  height: 60px;
+  width: 60px;
+  border-left: 4px solid white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+
+}
+
+@keyframes spin{
+  to {transform: rotate(360deg);}
+}

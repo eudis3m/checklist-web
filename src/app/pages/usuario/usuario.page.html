@@ -1,0 +1,78 @@
+<!--ion-tabs>
+
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="tab1">
+      <ion-icon name="triangle"></ion-icon>
+      <ion-label>Tab 1</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="tab2">
+      <ion-icon name="ellipse"></ion-icon>
+      <ion-label>Tab 2</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="tab3">
+      <ion-icon name="square"></ion-icon>
+      <ion-label>Tab 3</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+
+</ion-tabs-->
+<ion-content [fullscreen]="true">
+  <ion-header [translucent]="true">
+    <ion-toolbar>
+      <ion-title>
+        Cadastro de Veiculos
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+        <form  [formGroup]="Group" (ngSubmit)="login()">
+          <ion-item>
+            <ion-input  value={text} placeholder="Veiculos" formControlName="dsVeiculo" required></ion-input>
+            <ion-row *ngIf="isFieldInvalid('dsVeiculo')">
+              <ion-col>
+              <p>Favor infome o Veiculo</p>
+            </ion-col>
+            </ion-row>
+          </ion-item>
+          <ion-item > 
+            <ion-input  value="text" placeholder="Placa" formControlName="dsPlaca"  required></ion-input>
+            <ion-row *ngIf="isFieldInvalid('dsPlaca')">
+              <ion-col>
+                <p>Favor informe a Placa</p>
+              </ion-col>
+            </ion-row>
+          </ion-item>
+          <ion-item > 
+            <ion-input value="text" placeholder="cep" formControlName="dsCep"  required></ion-input>
+            <ion-row *ngIf="isFieldValid('dsCep')">
+              <ion-col>
+                <p>Favor informe o Cep</p>
+              </ion-col>
+            </ion-row>
+            <ion-row *ngIf="isFieldValid('dsCep')">
+              <ion-col>
+                <ion-input value="text" placeholder="endereço" formControlName="dsEndereco"  required></ion-input>
+              </ion-col>
+              <ion-col>
+                <ion-input value="text" placeholder="cidade" formControlName="dsCidade"  required></ion-input>
+              </ion-col>
+            </ion-row>
+          </ion-item>
+          <ion-item > 
+            <ion-input  value="text" placeholder="numero" formControlName="dsNumero"  required></ion-input>
+          </ion-item>
+          <ion-item > 
+            <ion-input  value="text" placeholder="Chassi" formControlName="dsChassi"  required></ion-input>
+          </ion-item>
+          <ion-item > 
+            <ion-input  value="text" placeholder="Renavam" formControlName="dsRenavam"  required></ion-input>
+          </ion-item>
+          <ion-item > 
+          <!--IonCheckbox checked={checked} onIonChange={e => setChecked(e.detail.checked)} /-->
+          </ion-item > 
+          <ion-button  class="botaoNovo" color="warn" type="submit" matToolTip="Acesso ao sistema" [disabled]="!Group.valid">Autenticar
+            <ion-icon name="md-close" showWhen="android,windows">send</ion-icon>
+          </ion-button>
+        </form> 
+</ion-content>

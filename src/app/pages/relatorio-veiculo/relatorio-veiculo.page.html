@@ -1,0 +1,74 @@
+<ion-content [fullscreen]="true">
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Relatorio de Veiculo</ion-title>
+  </ion-toolbar>
+</ion-header>
+<form  [formGroup]="Group" (ngSubmit)="onSubmit()" OnUnload="destroy()">
+  <ion-card>
+    <ion-card-content>
+
+        <ion-item lines="full">
+            <ion-label position="floating">Placa</ion-label>
+            <ion-input matInput type='text'  formControlName="placa" [brmasker]="{mask:'###-####', len:8, userCaracters: true}" [(ngModel)]="relatorioVeiculo.placa"></ion-input>
+            <ion-error *ngIf="Group.get('placa').errors?.cadastroErro">
+              Veículo já cadastrado
+            </ion-error>
+        </ion-item>
+
+        <ion-item lines="full">
+          <ion-label position="floating">Placa Mercosul</ion-label>
+          <ion-input matInput type='text'  formControlName="placaMercosul" [brmasker]="{mask:'#######', len:7, userCaracters: true}" [(ngModel)]="relatorioVeiculo.placaMercosul"></ion-input>
+          <ion-error *ngIf="Group.get('placaMercosul').errors?.cadastroErro">
+            Veículo já cadastrado
+          </ion-error>
+        </ion-item>
+
+      <ion-item lines="full">
+        <ion-label position="floating">Saída</ion-label>
+        <ion-input matInput type='date'  formControlName="saida" [(ngModel)]="relatorioVeiculo.saida" ></ion-input>
+      </ion-item>
+
+      <ion-item lines="full">
+        <ion-label position="floating">Proprietario</ion-label>
+        <ion-input type='text'  formControlName="nome" matInput [(ngModel)]="relatorioVeiculo.nome"></ion-input>
+      </ion-item>
+
+      <ion-item lines="full">
+        <ion-label position="floating">Registro Civil</ion-label>
+        <ion-input type='text'  formControlName="rg"  matInput [(ngModel)]="relatorioVeiculo.rg"></ion-input>
+      </ion-item>
+
+      <ion-item lines="full">
+        <ion-label position="floating">Serviço de Segurança Pública</ion-label>
+        <ion-input type='text'  formControlName="ssp"  matInput [(ngModel)]="relatorioVeiculo.ssp"></ion-input>
+      </ion-item>
+
+      <ion-item lines="full">
+        <ion-label position="floating">Carteira Nacional de Habilitação</ion-label>
+        <ion-input type='numeric'  formControlName="cnh"  matInput [(ngModel)]="relatorioVeiculo.cnh"></ion-input>
+      </ion-item>
+
+      <ion-item lines="full">
+        <ion-label position="floating">Categoria</ion-label>
+        <ion-input type='text'  formControlName="categoria" matInput [(ngModel)]="relatorioVeiculo.categoria"></ion-input>
+      </ion-item>
+
+      <ion-item lines="full" *ngIf="cadastrarveiculoEntity != null">
+        <ion-label position="floating">email</ion-label>
+        <ion-input type='text'  formControlName="email" matInput [(ngModel)]="relatorioVeiculo.email"></ion-input>
+      </ion-item>
+      
+      <ion-item lines="full">
+      <ion-button  class="botaoNovo"  type="submit" >Cadastrar</ion-button>   <ion-button  class="botaoNovo"  routerLink='/assinatura' >Assinar</ion-button>
+      <ion-item lines="full" *ngIf="relatorioVeiculo.placa != null">
+        <ion-button  *ngIf="cadastrarveiculoEntity != null" class="botaoNovo"  (click)="GerarRelatorio()"  >Relatorio</ion-button>
+         <!--ion-route *ngIf="GerarRelatorio() != null" routerLink='jsPDF'>
+         </ion-route-->
+      </ion-item>
+     </ion-item>
+    </ion-card-content>
+  </ion-card>
+</form>
+</ion-content>
+

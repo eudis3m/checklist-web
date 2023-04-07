@@ -1,0 +1,32 @@
+<ion-content [fullscreen]="true">
+  <ion-header [translucent]="true">
+    <ion-toolbar>
+      <ion-title>
+        Login
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <form  [formGroup]="Group"   (ngSubmit)="login()">
+          <ion-card>
+            <ion-card-content>
+          <ion-item lines="full">
+            <ion-input  value={text} placeholder="Usuário" formControlName="dsLogin" required></ion-input>
+            <ion-row *ngIf="isFieldInvalid('dsLogin')">
+              <ion-col>
+              <p>Favor infome seu usuário</p>
+            </ion-col>
+            </ion-row>
+          </ion-item>
+          <ion-item lines="full"> 
+            <ion-input  type="password" value={password} placeholder="Senha" formControlName="dssenha"  required></ion-input>
+            <ion-row *ngIf="isFieldInvalid('dssenha')">
+              <ion-col>
+                <p>Favor informe sua senha</p>
+              </ion-col>
+            </ion-row>
+          </ion-item>
+          <ion-button  class="botaoNovo"  type="submit" [disabled]="!Group.valid">Login</ion-button>
+        </ion-card-content>
+      </ion-card>
+    </form> 
+</ion-content>

@@ -1,0 +1,1205 @@
+<ion-content [fullscreen]="true">
+    <ion-header [translucent]="true">
+      <ion-toolbar>
+        <ion-title>Atualizar Veiculo</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-card>
+      <form  [formGroup]="Group" (ngSubmit)="onSubmit()" (ngSubmit)="Submit()">
+    <ion-item lines="full">
+      <ion-label position="floating">Placa</ion-label>
+      <ion-input type='text'  formControlName="placa" matInput [brmasker]="{mask:'###-####', len:8, userCaracters: true}" [(ngModel)]="updateVeiculo.placa"></ion-input>
+    </ion-item>
+    </form>
+    </ion-card>
+
+    <ion-card *ngIf="listaAutomovel != null">
+      <form  [formGroup]="Group" (ngSubmit)="onSubmit()" OnUnload="destroy()">
+
+         <ion-card>
+          <ion-card-content>
+  
+            <!--ion-item lines="full">
+              <ion-label position="floating">OID</ion-label>
+              <ion-input matInput type='numeric' [value]="listaAutomovel.oid" [brmasker]="{userCaracters: true}" formControlName="oid" [(ngModel)]="updateVeiculo.oid" disabled >
+              </ion-input> 
+            </ion-item-->
+          
+              <ion-item  lines="full">
+              <ion-label position="floating">Solicitante</ion-label>
+              <ion-input matInput id="solicitante" type="text"  formControlName="solicitante" [(ngModel)]="updateVeiculo.solicitante" required>
+              <!--ion-option *ngFor="let updateVeiculo of solicitante" >
+                {{updateVeiculo.solicitante}}
+              </ion-option-->
+              </ion-input> 
+            </ion-item>
+  
+            <ion-item lines="full">
+              <ion-label position="floating">Entrada</ion-label> 
+              <ion-input matInput [brmasker]="{mask:'yyyy-MM-dd', len:10}" type='date'  [value]="listaAutomovel.entrada" formControlName="entrada" [(ngModel)]="updateVeiculo.entrada" >
+              </ion-input>    
+            </ion-item>
+      
+            <ion-item lines="full">
+              <ion-label position="floating">Proprietario</ion-label>
+              <ion-input type='text'   formControlName="proprietario" matInput [(ngModel)]="updateVeiculo.proprietario"></ion-input>
+            </ion-item>
+      
+            <ion-item lines="full">
+              <ion-label position="floating">veiculo</ion-label>
+              <ion-input type='text'  formControlName="veiculo"  matInput [(ngModel)]="updateVeiculo.veiculo"></ion-input>
+            </ion-item>
+      
+            <ion-item lines="full">
+              <ion-label position="floating">Chassi</ion-label>
+              <ion-input type='text' [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.chassi" formControlName="chassi"  matInput [(ngModel)]="updateVeiculo.chassi"></ion-input>
+            </ion-item>
+      
+            <ion-item lines="full">
+              <ion-label position="floating">Local</ion-label>
+              <ion-input type='text'  formControlName="local"  matInput [(ngModel)]="updateVeiculo.local"></ion-input>
+            </ion-item>
+      
+            <ion-item lines="full">
+              <ion-label position="floating">Atraves de</ion-label>
+              <ion-input type='text'   formControlName="atravesDE" matInput [(ngModel)]="updateVeiculo.atravesDE"></ion-input>
+            </ion-item>
+      
+            <ion-item lines="full">
+              <ion-label position="floating">Telefone</ion-label>
+              <ion-input type='tel'  [value]="listaAutomovel.telefone" formControlName="telefone" matInput  [brmasker]="{phone: true}" [(ngModel)]="updateVeiculo.telefone"></ion-input>
+            </ion-item>
+      
+            <ion-item lines="full">
+              <ion-label position="floating">Renavam</ion-label>
+              <ion-input type='numeric' [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.renavam" formControlName="renavam" matInput [(ngModel)]="updateVeiculo.renavam"></ion-input>
+            </ion-item>
+      
+            <ion-item lines="full">
+              <ion-label position="floating">Bairro</ion-label>
+              <ion-input type='text'  formControlName="bairro"  matInput [(ngModel)]="updateVeiculo.bairro"></ion-input>
+            </ion-item>
+      
+            <ion-item lines="full">
+              <ion-label position="floating">CPF/CNPJ</ion-label>
+              <ion-input type='numeric' [brmasker]="{person: true}" [value]="listaAutomovel.cpf_cnpj"  formControlName="cpf_cnpj" matInput [(ngModel)]="updateVeiculo.cpf_cnpj"></ion-input>
+            </ion-item>
+      
+            <ion-item lines="full">
+              <ion-label position="floating">Cor</ion-label>
+              <ion-input type='text' [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.cor"  formControlName="cor"  matInput [(ngModel)]="updateVeiculo.cor"></ion-input>
+            </ion-item>
+      
+            <ion-item lines="full">
+              <ion-label position="floating">Placa</ion-label>
+              <ion-input type='text' [value]="listaAutomovel.placa" formControlName="placa" matInput [brmasker]="{mask:'###-####', len:8, userCaracters: true}" [(ngModel)]="updateVeiculo.placa"></ion-input>
+            </ion-item>
+      
+            <ion-item lines="full">
+              <ion-label position="floating">Produto</ion-label>
+              <ion-input type='text' formControlName="produto" matInput [(ngModel)]="updateVeiculo.produto"></ion-input>
+            </ion-item>
+      
+            <ion-item lines="full">
+              <ion-label position="floating">Cidade</ion-label>
+              <ion-input type='text'  formControlName="cidade"  matInput [(ngModel)]="updateVeiculo.cidade"></ion-input>
+            </ion-item>
+            <ion-item lines="full">
+              <ion-label position="floating">UF</ion-label>
+              <ion-input type='text'   formControlName="uf"  matInput [(ngModel)]="updateVeiculo.uf"></ion-input>
+            </ion-item>
+
+            <ion-list lines="full">
+              <ion-radio-group value="biff" matInput [value]="listaAutomovel.caminhao" [brmasker]="{mask:'', len:100}" formControlName="caminhao" [(ngModel)]="updateVeiculo.caminhao">
+                <ion-list-header>
+                  <ion-label>Caminhão</ion-label>
+                </ion-list-header>
+      
+                <ion-item>
+                  <ion-label>Sim</ion-label>
+                  <ion-radio  type='text' [checked]="selected" slot="start" value="Sim" ></ion-radio>
+                </ion-item>
+      
+                <ion-item>
+                  <ion-label>Não</ion-label>
+                  <ion-radio type='text' [checked]="selected" slot="start" value="Não"  ></ion-radio>
+                </ion-item>
+              </ion-radio-group>
+            </ion-list>
+
+            <ion-list lines="full">
+              <ion-radio-group value="biff" matInput  [value]="listaAutomovel.guincho" [brmasker]="{mask:'', len:100}" formControlName="guincho" [(ngModel)]="updateVeiculo.guincho">
+                <ion-list-header>
+                  <ion-label>Guincho</ion-label>
+                </ion-list-header>
+      
+                <ion-item>
+                  <ion-label>Sim</ion-label>
+                  <ion-radio  type='text' [checked]="selected" slot="start" value="Sim" ></ion-radio>
+                </ion-item>
+      
+                <ion-item>
+                  <ion-label>Não</ion-label>
+                  <ion-radio type='text' [checked]="selected" slot="start" value="Não"  ></ion-radio>
+                </ion-item>
+              </ion-radio-group>
+            </ion-list>
+      
+            <ion-list lines="full">
+              <ion-radio-group value="biff" [value]="listaAutomovel.documento" [brmasker]="{mask:'', len:100}" formControlName="documento" matInput [(ngModel)]="updateVeiculo.documento">
+                <ion-list-header>
+                  <ion-label>Documento</ion-label>
+                </ion-list-header>
+      
+                <ion-item>
+                  <ion-label>Sim</ion-label>
+                  <ion-radio slot="start" value="Sim" type='text' [checked]="selected"></ion-radio>
+                </ion-item>
+      
+                <ion-item>
+                  <ion-label>Não</ion-label>
+                  <ion-radio slot="start" value="Não"  type='text' [checked]="selected"></ion-radio>
+                </ion-item>
+              </ion-radio-group>
+            </ion-list>
+      
+            <ion-list lines="full">
+              <ion-radio-group value="biff" [value]="listaAutomovel.bagagito" [brmasker]="{mask:'', len:100}" formControlName="bagagito"  matInput [(ngModel)]="updateVeiculo.bagagito">
+                <ion-list-header>
+                  <ion-label>Bagagito</ion-label>
+                </ion-list-header>
+      
+                <ion-item>
+                  <ion-label>Sim</ion-label>
+                  <ion-radio slot="start" value="Sim" type='text' [checked]="selected"></ion-radio>
+                </ion-item>
+      
+                <ion-item>
+                  <ion-label>Não</ion-label>
+                  <ion-radio slot="start" value="Não" type='text' [checked]="selected"></ion-radio>
+                </ion-item>
+              </ion-radio-group>
+            </ion-list>
+      
+            <ion-list lines="full">
+              <ion-radio-group value="biff" [value]="listaAutomovel.retrovisor_eletrico" [brmasker]="{mask:'', len:100}" formControlName="retrovisor_eletrico"  matInput [(ngModel)]="updateVeiculo.retrovisor_eletrico">
+                <ion-list-header>
+                  <ion-label>Retrovisor Eletrico</ion-label>
+                </ion-list-header>
+      
+                <ion-item>
+                  <ion-label>Sim</ion-label>
+                  <ion-radio slot="start" value="Sim" type='text' [checked]="selected"></ion-radio>
+                </ion-item>
+      
+                <ion-item>
+                  <ion-label>Não</ion-label>
+                  <ion-radio slot="start" value="Não" type='text' [checked]="selected"></ion-radio>
+                </ion-item>
+              </ion-radio-group>
+            </ion-list>
+      
+            <ion-list lines="full">
+              <ion-radio-group value="biff" [value]="listaAutomovel.retrovisor_comum" [brmasker]="{mask:'', len:100}" formControlName="retrovisor_comum"  matInput [(ngModel)]="updateVeiculo.retrovisor_comum">
+                <ion-list-header>
+                  <ion-label>Retrovisor Comum</ion-label>
+                </ion-list-header>
+      
+                <ion-item>
+                  <ion-label>Sim</ion-label>
+                  <ion-radio slot="start" value="Sim" type='text' [checked]="selected"></ion-radio>
+                </ion-item>
+      
+                <ion-item>
+                  <ion-label>Não</ion-label>
+                  <ion-radio slot="start" value="Não" type='text' [checked]="selected"></ion-radio>
+                </ion-item>
+              </ion-radio-group>
+            </ion-list>
+      
+            <ion-list lines="full">
+              <ion-radio-group value="biff" [value]="listaAutomovel.borrachao_lateral" [brmasker]="{mask:'', len:100}" formControlName="borrachao_lateral"  matInput [(ngModel)]="updateVeiculo.borrachao_lateral">
+                <ion-list-header>
+                  <ion-label>Borrachao Lateral</ion-label>
+                </ion-list-header>
+      
+                <ion-item>
+                  <ion-label>Sim</ion-label>
+                  <ion-radio slot="start" value="Sim" type='text' [checked]="selected"></ion-radio>
+                </ion-item>
+      
+                <ion-item>
+                  <ion-label>Não</ion-label>
+                  <ion-radio slot="start" value="Não" type='text' [checked]="selected"></ion-radio>
+                </ion-item>
+              </ion-radio-group>
+            </ion-list>
+      
+            <ion-list lines="full">
+              <ion-radio-group value="biff" [value]="listaAutomovel.break_light" [brmasker]="{mask:'', len:100}" formControlName="break_light" matInput [(ngModel)]="updateVeiculo.break_light">
+                <ion-list-header>
+                  <ion-label>Break Light</ion-label>
+                </ion-list-header>
+      
+                <ion-item>
+                  <ion-label>Sim</ion-label>
+                  <ion-radio slot="start" value="Sim" type='text' [checked]="selected"></ion-radio>
+                </ion-item>
+      
+                <ion-item>
+                  <ion-label>Não</ion-label>
+                  <ion-radio slot="start" value="Não" type='text' [checked]="selected"></ion-radio>
+                </ion-item>
+              </ion-radio-group>
+            </ion-list>
+      
+            <ion-list lines="full">
+              <ion-radio-group value="biff" [value]="listaAutomovel.farois_auxiliares"  [brmasker]="{mask:'', len:100}"formControlName="farois_auxiliares"  matInput [(ngModel)]="updateVeiculo.farois_auxiliares">
+                <ion-list-header>
+                  <ion-label>Farois Auxiliares</ion-label>
+                </ion-list-header>
+      
+                <ion-item>
+                  <ion-label>Sim</ion-label>
+                  <ion-radio slot="start" value="Sim" type='text' [checked]="selected"></ion-radio>
+                </ion-item>
+      
+                <ion-item>
+                  <ion-label>Não</ion-label>
+                  <ion-radio slot="start" value="Não" type='text' [checked]="selected"></ion-radio>
+                </ion-item>
+              </ion-radio-group>
+            </ion-list>
+      
+            <ion-list lines="full">
+              <ion-radio-group value="biff" [value]="listaAutomovel.rodas_comum" [brmasker]="{mask:'', len:100}" formControlName="rodas_comum"  matInput [(ngModel)]="updateVeiculo.rodas_comum">
+                <ion-list-header>
+                  <ion-label>Rodas Comuns</ion-label>
+                </ion-list-header>
+      
+                <ion-item>
+                  <ion-label>Sim</ion-label>
+                  <ion-radio slot="start" value="Sim" type='text' [checked]="selected"></ion-radio>
+                </ion-item>
+      
+                <ion-item>
+                  <ion-label>Não</ion-label>
+                  <ion-radio slot="start" value="Não" type='text' [checked]="selected"></ion-radio>
+                </ion-item>
+              </ion-radio-group>
+            </ion-list>
+      
+            <ion-list lines="full">
+              <ion-radio-group value="biff" [value]="listaAutomovel.rodas_de_liga" [brmasker]="{mask:'', len:100}" formControlName="rodas_de_liga"  matInput [(ngModel)]="updateVeiculo.rodas_de_liga">
+                <ion-list-header>
+                  <ion-label>Rodas de Liga Leve</ion-label>
+                </ion-list-header>
+      
+                <ion-item>
+                  <ion-label>Sim</ion-label>
+                  <ion-radio slot="start" value="Sim" type='text' [checked]="selected"></ion-radio>
+                </ion-item>
+      
+                <ion-item>
+                  <ion-label>Não</ion-label>
+                  <ion-radio slot="start" value="Não" type='text' [checked]="selected"></ion-radio>
+                </ion-item>
+              </ion-radio-group>
+            </ion-list>
+      
+            <ion-list lines="full">
+              <ion-radio-group value="biff" formControlName="radio_toca_cds" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.radio_toca_cds" matInput [(ngModel)]="updateVeiculo.radio_toca_cds">
+                <ion-list-header>
+                  <ion-label>Radio Toca CDS</ion-label>
+                </ion-list-header>
+      
+                <ion-item>
+                  <ion-label>Sim</ion-label>
+                  <ion-radio slot="start" value="Sim" type='text' [checked]="selected"></ion-radio>
+                </ion-item>
+      
+                <ion-item>
+                  <ion-label>Não</ion-label>
+                  <ion-radio slot="start" value="Não" type='text' [checked]="selected"></ion-radio>
+                </ion-item>
+              </ion-radio-group>
+            </ion-list>
+      
+            <ion-list lines="full">
+              <ion-radio-group value="biff" formControlName="amplificador" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.amplificador" matInput [(ngModel)]="updateVeiculo.amplificador">
+                <ion-list-header>
+                  <ion-label>Amplificador</ion-label>
+                </ion-list-header>
+      
+                <ion-item>
+                  <ion-label>Sim</ion-label>
+                  <ion-radio slot="start" value="Sim" type='text' [checked]="selected"></ion-radio>
+                </ion-item>
+      
+                <ion-item>
+                  <ion-label>Não</ion-label>
+                  <ion-radio slot="start" value="Não" type='text' [checked]="selected"></ion-radio>
+                </ion-item>
+              </ion-radio-group>
+            </ion-list>
+      
+      
+            <ion-list lines="full">
+              <ion-radio-group value="biff" formControlName="banco_dianteiro" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.banco_dianteiro"  matInput [(ngModel)]="updateVeiculo.banco_dianteiro">
+                <ion-list-header>
+                  <ion-label>Banco Dianteiro</ion-label>
+                </ion-list-header>
+      
+                <ion-item>
+                  <ion-label>Sim</ion-label>
+                  <ion-radio slot="start" value="Sim" type='text' [checked]="selected"></ion-radio>
+                </ion-item>
+      
+                <ion-item>
+                  <ion-label>Não</ion-label>
+                  <ion-radio slot="start" value="Não" type='text' [checked]="selected"></ion-radio>
+                </ion-item>
+              </ion-radio-group>
+            </ion-list>
+      
+            <ion-list lines="full">
+              <ion-radio-group value="biff" formControlName="banco_traseiro" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.banco_traseiro" matInput [(ngModel)]="updateVeiculo.banco_traseiro">
+                <ion-list-header>
+                  <ion-label>Banco Traseiro</ion-label>
+                </ion-list-header>
+      
+                <ion-item>
+                  <ion-label>Sim</ion-label>
+                  <ion-radio slot="start" value="Sim" type='text' [checked]="selected"></ion-radio>
+                </ion-item>
+      
+                <ion-item>
+                  <ion-label>Não</ion-label>
+                  <ion-radio slot="start" value="Não" type='text' [checked]="selected"></ion-radio>
+                </ion-item>
+              </ion-radio-group>
+            </ion-list>
+      
+            <ion-list lines="full">
+              <ion-radio-group value="biff" formControlName="tapetes" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.tapetes" matInput [(ngModel)]="updateVeiculo.tapetes">
+                <ion-list-header>
+                  <ion-label>Tapetes</ion-label>
+                </ion-list-header>
+      
+                <ion-item>
+                  <ion-label>Sim</ion-label>
+                  <ion-radio slot="start" value="Sim" type='text' [checked]="selected"></ion-radio>
+                </ion-item>
+      
+                <ion-item>
+                  <ion-label>Não</ion-label>
+                  <ion-radio slot="start" value="Não" type='text' [checked]="selected"></ion-radio>
+                </ion-item>
+              </ion-radio-group>
+            </ion-list>
+      
+            <ion-list lines="full">
+              <ion-radio-group value="biff" formControlName="protetor_carter" [value]="listaAutomovel.protetor_carter"  matInput [(ngModel)]="updateVeiculo.protetor_carter">
+                <ion-list-header>
+                  <ion-label>Protetor de Carter</ion-label>
+                </ion-list-header>
+      
+                <ion-item>
+                  <ion-label>Sim</ion-label>
+                  <ion-radio slot="start" value="Sim" type='text' [checked]="selected"></ion-radio>
+                </ion-item>
+      
+                <ion-item>
+                  <ion-label>Não</ion-label>
+                  <ion-radio slot="start" value="Não" type='text' [checked]="selected"></ion-radio>
+                </ion-item>
+              </ion-radio-group>
+            </ion-list>
+      
+            <ion-list lines="full">
+              <ion-radio-group value="biff" formControlName="extintor" [brmasker]="{mask:'', len:100}"[value]="listaAutomovel.extintor" matInput [(ngModel)]="updateVeiculo.extintor">
+                <ion-list-header>
+                  <ion-label>Extintor</ion-label>
+                </ion-list-header>
+      
+                <ion-item>
+                  <ion-label>Sim</ion-label>
+                  <ion-radio slot="start" value="Sim" type='text' [checked]="selected"></ion-radio>
+                </ion-item>
+      
+                <ion-item>
+                  <ion-label>Não</ion-label>
+                  <ion-radio slot="start" value="Não" type='text' [checked]="selected"></ion-radio>
+                </ion-item>
+              </ion-radio-group>
+            </ion-list>
+      
+            <ion-list lines="full">
+              <ion-radio-group value="biff" formControlName="triangulo" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.triangulo" matInput [(ngModel)]="updateVeiculo.triangulo">
+                <ion-list-header>
+                  <ion-label>Triângulo</ion-label>
+                </ion-list-header>
+      
+                <ion-item>
+                  <ion-label>Sim</ion-label>
+                  <ion-radio slot="start" value="Sim" type='text' [checked]="selected"></ion-radio>
+                </ion-item>
+      
+                <ion-item>
+                  <ion-label>Não</ion-label>
+                  <ion-radio slot="start" value="Não" type='text' [checked]="selected"></ion-radio>
+                </ion-item>
+              </ion-radio-group>
+            </ion-list>
+      
+            <ion-list lines="full">
+              <ion-radio-group value="biff" formControlName="console_interno" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.console_interno" matInput [(ngModel)]="updateVeiculo.console_interno">
+                <ion-list-header>
+                  <ion-label>Console Interno</ion-label>
+                </ion-list-header>
+      
+                <ion-item>
+                  <ion-label>Sim</ion-label>
+                  <ion-radio slot="start" value="Sim" type='text' [checked]="selected"></ion-radio>
+                </ion-item>
+      
+                <ion-item>
+                  <ion-label>Não</ion-label>
+                  <ion-radio slot="start" value="Não" type='text' [checked]="selected"></ion-radio>
+                </ion-item>
+              </ion-radio-group>
+            </ion-list>
+      
+            <ion-list lines="full">
+              <ion-radio-group value="biff" formControlName="buzinas" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.buzinas"  matInput [(ngModel)]="updateVeiculo.buzinas">
+                <ion-list-header>
+                  <ion-label>Buzinas</ion-label>
+                </ion-list-header>
+      
+                <ion-item>
+                  <ion-label>Sim</ion-label>
+                  <ion-radio slot="start" value="Sim" type='text' [checked]="selected"></ion-radio>
+                </ion-item>
+      
+                <ion-item>
+                  <ion-label>Não</ion-label>
+                  <ion-radio slot="start" value="Não" type='text' [checked]="selected"></ion-radio>
+                </ion-item>
+              </ion-radio-group>
+            </ion-list>
+      
+            <ion-list lines="full">
+              <ion-radio-group value="biff" formControlName="bateria" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.bateria"  matInput [(ngModel)]="updateVeiculo.bateria">
+                <ion-list-header>
+                  <ion-label>Bateria</ion-label>
+                </ion-list-header>
+      
+                <ion-item>
+                  <ion-label>Sim</ion-label>
+                  <ion-radio slot="start" value="Sim" type='text' [checked]="selected"></ion-radio>
+                </ion-item>
+      
+                <ion-item>
+                  <ion-label>Não</ion-label>
+                  <ion-radio slot="start" value="Não" type='text' [checked]="selected"></ion-radio>
+                </ion-item>
+              </ion-radio-group>
+            </ion-list>
+      
+            <ion-list lines="full">
+              <ion-radio-group value="biff" formControlName="macaco" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.macaco" matInput [(ngModel)]="updateVeiculo.macaco">
+                <ion-list-header>
+                  <ion-label>Macaco</ion-label>
+                </ion-list-header>
+      
+                <ion-item>
+                  <ion-label>Sim</ion-label>
+                  <ion-radio slot="start" value="Sim" type='text' [checked]="selected"></ion-radio>
+                </ion-item>
+      
+                <ion-item>
+                  <ion-label>Não</ion-label>
+                  <ion-radio slot="start" value="Não" type='text' [checked]="selected"></ion-radio>
+                </ion-item>
+              </ion-radio-group>
+            </ion-list>
+      
+            <ion-list lines="full">
+              <ion-radio-group value="biff" formControlName="chave_de_roda" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.chave_de_roda" matInput [(ngModel)]="updateVeiculo.chave_de_roda">
+                <ion-list-header>
+                  <ion-label>Chave de Roda</ion-label>
+                </ion-list-header>
+      
+                <ion-item>
+                  <ion-label>Sim</ion-label>
+                  <ion-radio slot="start" value="Sim" type='text' [checked]="selected"></ion-radio>
+                </ion-item>
+      
+                <ion-item>
+                  <ion-label>Não</ion-label>
+                  <ion-radio slot="start" value="Não" type='text' [checked]="selected"></ion-radio>
+                </ion-item>
+              </ion-radio-group>
+            </ion-list>
+      
+            <ion-list lines="full">
+              <ion-radio-group value="biff" formControlName="calotas" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.calotas" matInput [(ngModel)]="updateVeiculo.calotas">
+                <ion-list-header>
+                  <ion-label>Calotas</ion-label>
+                </ion-list-header>
+      
+                <ion-item>
+                  <ion-label>Sim</ion-label>
+                  <ion-radio slot="start" value="Sim" type='text' [checked]="selected"></ion-radio>
+                </ion-item>
+      
+                <ion-item>
+                  <ion-label>Não</ion-label>
+                  <ion-radio slot="start" value="Não" type='text' [checked]="selected"></ion-radio>
+                </ion-item>
+              </ion-radio-group>
+            </ion-list>
+      
+            <ion-list lines="full">
+              <ion-radio-group value="biff" formControlName="alarme" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.alarme" *ngIf="updateVeiculo.alarme == null" matInput [(ngModel)]="updateVeiculo.alarme">
+                <ion-list-header>
+                  <ion-label>Alarme</ion-label>
+                </ion-list-header>
+      
+                <ion-item>
+                  <ion-label>Sim</ion-label>
+                  <ion-radio slot="start" value="Sim" type='text' [checked]="selected"></ion-radio>
+                </ion-item>
+      
+                <ion-item>
+                  <ion-label>Não</ion-label>
+                  <ion-radio slot="start" value="Não" type='text' [checked]="selected"></ion-radio>
+                </ion-item>
+              </ion-radio-group>
+            </ion-list>
+            <ion-item>
+              <ion-label>Baú lado Direito</ion-label>
+              <ion-select formControlName="bau_dir" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.bau_dir"  matInput [(ngModel)]="updateVeiculo.bau_dir">
+                <ion-select-option *ngIf="listaAutomovel.bau_dir == 1" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.bau_dir" value="1">Avariado</ion-select-option>
+                <ion-select-option *ngIf="listaAutomovel.bau_dir == 2" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.bau_dir" value="2">Risco</ion-select-option>
+                <ion-select-option *ngIf="listaAutomovel.bau_dir == 3" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.bau_dir" value="3">Falta</ion-select-option>
+                <ion-select-option *ngIf="listaAutomovel.bau_dir == 4" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.bau_dir" value="4">Quebrado</ion-select-option>
+                <ion-select-option *ngIf="listaAutomovel.bau_dir == 5" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.bau_dir" value="5">Trincado</ion-select-option>
+                <ion-select-option *ngIf="listaAutomovel.bau_dir == 6" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.bau_dir" value="6">Amassado</ion-select-option>
+                <ion-select-option *ngIf="listaAutomovel.bau_dir == 7" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.bau_dir" value="7">Impossível Vistoriar</ion-select-option>
+
+                <ion-select-option *ngIf="listaAutomovel.bau_dir != 0 && listaAutomovel.bau_dir != 1" value="1">Avariado</ion-select-option>
+                <ion-select-option *ngIf="listaAutomovel.bau_dir != 0 && listaAutomovel.bau_dir != 2" value="2">Risco</ion-select-option>
+                <ion-select-option *ngIf="listaAutomovel.bau_dir != 0 && listaAutomovel.bau_dir != 3" value="3">Falta</ion-select-option>
+                <ion-select-option *ngIf="listaAutomovel.bau_dir != 0 && listaAutomovel.bau_dir != 4" value="4">Quebrado</ion-select-option>
+                <ion-select-option *ngIf="listaAutomovel.bau_dir != 0 && listaAutomovel.bau_dir != 5" value="5">Trincado</ion-select-option>
+                <ion-select-option *ngIf="listaAutomovel.bau_dir != 0 && listaAutomovel.bau_dir != 6" value="6">Amassado</ion-select-option>
+                <ion-select-option *ngIf="listaAutomovel.bau_dir != 0 && listaAutomovel.bau_dir != 7" value="7">Impossível Vistoriar</ion-select-option>
+              </ion-select>
+              </ion-item>
+
+              <ion-item>
+                <ion-label>Baú lado Esquerdo</ion-label>
+                <ion-select formControlName="bau_esq"  matInput [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.bau_esq" [(ngModel)]="updateVeiculo.bau_esq">
+                  <ion-select-option *ngIf="listaAutomovel.bau_esq == 1" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.bau_esq" value="1">Avariado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.bau_esq == 2" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.bau_esq" value="2">Risco</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.bau_esq == 3" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.bau_esq" value="3">Falta</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.bau_esq == 4" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.bau_esq" value="4">Quebrado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.bau_esq == 5" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.bau_esq" value="5">Trincado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.bau_esq == 6" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.bau_esq" value="6">Amassado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.bau_esq == 7" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.bau_esq" value="7">Impossível Vistoriar</ion-select-option>
+
+                  <ion-select-option *ngIf="listaAutomovel.bau_esq != 0 && listaAutomovel.bau_esq != 1" value="1">Avariado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.bau_esq != 0 && listaAutomovel.bau_esq != 2" value="2">Risco</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.bau_esq != 0 && listaAutomovel.bau_esq != 3" value="3">Falta</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.bau_esq != 0 && listaAutomovel.bau_esq != 4" value="4">Quebrado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.bau_esq != 0 && listaAutomovel.bau_esq != 5" value="5">Trincado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.bau_esq != 0 && listaAutomovel.bau_esq != 6" value="6">Amassado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.bau_esq != 0 && listaAutomovel.bau_esq != 7" value="7">Impossível Vistoriar</ion-select-option>
+                </ion-select>
+                </ion-item>
+
+                <ion-item>
+                  <ion-label>Roda Traseira Direita</ion-label>
+                  <ion-select formControlName="roda_tras_dir" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.roda_tras_dir"  matInput [(ngModel)]="updateVeiculo.roda_tras_dir">
+                    <ion-select-option *ngIf="listaAutomovel.roda_tras_dir == 1" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.roda_tras_dir" value="1">Avariado</ion-select-option>
+                    <ion-select-option *ngIf="listaAutomovel.roda_tras_dir == 2" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.roda_tras_dir" value="2">Risco</ion-select-option>
+                    <ion-select-option *ngIf="listaAutomovel.roda_tras_dir == 3" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.roda_tras_dir" value="3">Falta</ion-select-option>
+                    <ion-select-option *ngIf="listaAutomovel.roda_tras_dir == 4" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.roda_tras_dir" value="4">Quebrado</ion-select-option>
+                    <ion-select-option *ngIf="listaAutomovel.roda_tras_dir == 5" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.roda_tras_dir" value="5">Trincado</ion-select-option>
+                    <ion-select-option *ngIf="listaAutomovel.roda_tras_dir == 6" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.roda_tras_dir" value="6">Amassado</ion-select-option>
+                    <ion-select-option *ngIf="listaAutomovel.roda_tras_dir == 7" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.roda_tras_dir" value="7">Impossível Vistoriar</ion-select-option>
+
+                    <ion-select-option *ngIf="listaAutomovel.roda_tras_dir != 0 && listaAutomovel.roda_tras_dir != 1" value="1">Avariado</ion-select-option>
+                    <ion-select-option *ngIf="listaAutomovel.roda_tras_dir != 0 && listaAutomovel.roda_tras_dir != 2" value="2">Risco</ion-select-option>
+                    <ion-select-option *ngIf="listaAutomovel.roda_tras_dir != 0 && listaAutomovel.roda_tras_dir != 3" value="3">Falta</ion-select-option>
+                    <ion-select-option *ngIf="listaAutomovel.roda_tras_dir != 0 && listaAutomovel.roda_tras_dir != 4" value="4">Quebrado</ion-select-option>
+                    <ion-select-option *ngIf="listaAutomovel.roda_tras_dir != 0 && listaAutomovel.roda_tras_dir != 5" value="5">Trincado</ion-select-option>
+                    <ion-select-option *ngIf="listaAutomovel.roda_tras_dir != 0 && listaAutomovel.roda_tras_dir != 6" value="6">Amassado</ion-select-option>
+                    <ion-select-option *ngIf="listaAutomovel.roda_tras_dir != 0 && listaAutomovel.roda_tras_dir != 7" value="7">Impossível Vistoriar</ion-select-option>
+                  </ion-select>
+                  </ion-item>
+
+                  <ion-item>
+                    <ion-label>Tanque</ion-label>
+                    <ion-select formControlName="tanque"  matInput [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.tanque" [(ngModel)]="updateVeiculo.tanque">
+                      <ion-select-option *ngIf="listaAutomovel.tanque == 1" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.tanque" value="1">Avariado</ion-select-option>
+                      <ion-select-option *ngIf="listaAutomovel.tanque == 2" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.tanque" value="2">Risco</ion-select-option>
+                      <ion-select-option *ngIf="listaAutomovel.tanque == 3" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.tanque" value="3">Falta</ion-select-option>
+                      <ion-select-option *ngIf="listaAutomovel.tanque == 4" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.tanque" value="4">Quebrado</ion-select-option>
+                      <ion-select-option *ngIf="listaAutomovel.tanque == 5" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.tanque" value="5">Trincado</ion-select-option>
+                      <ion-select-option *ngIf="listaAutomovel.tanque == 6" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.tanque" value="6">Amassado</ion-select-option>
+                      <ion-select-option *ngIf="listaAutomovel.tanque == 7" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.tanque" value="7">Impossível Vistoriar</ion-select-option>
+
+                      <ion-select-option *ngIf="listaAutomovel.tanque != 0 && listaAutomovel.tanque != 1" value="1">Avariado</ion-select-option>
+                      <ion-select-option *ngIf="listaAutomovel.tanque != 0 && listaAutomovel.tanque != 2" value="2">Risco</ion-select-option>
+                      <ion-select-option *ngIf="listaAutomovel.tanque != 0 && listaAutomovel.tanque != 3" value="3">Falta</ion-select-option>
+                      <ion-select-option *ngIf="listaAutomovel.tanque != 0 && listaAutomovel.tanque != 4" value="4">Quebrado</ion-select-option>
+                      <ion-select-option *ngIf="listaAutomovel.tanque != 0 && listaAutomovel.tanque != 5" value="5">Trincado</ion-select-option>
+                      <ion-select-option *ngIf="listaAutomovel.tanque != 0 && listaAutomovel.tanque != 6" value="6">Amassado</ion-select-option>
+                      <ion-select-option *ngIf="listaAutomovel.tanque != 0 && listaAutomovel.tanque != 7" value="7">Impossível Vistoriar</ion-select-option>
+                    </ion-select>
+                    </ion-item>
+
+                    <ion-item>
+                      <ion-label>Vidro Dianteiro direito</ion-label>
+                      <ion-select formControlName="vidro_diant_dir"  matInput [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.vidro_diant_dir"  [(ngModel)]="updateVeiculo.vidro_diant_dir">
+                        <ion-select-option *ngIf="listaAutomovel.vidro_diant_dir == 1" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.vidro_diant_dir" value="1">Avariado</ion-select-option>
+                        <ion-select-option *ngIf="listaAutomovel.vidro_diant_dir == 2" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.vidro_diant_dir" value="2">Risco</ion-select-option>
+                        <ion-select-option *ngIf="listaAutomovel.vidro_diant_dir == 3" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.vidro_diant_dir" value="3">Falta</ion-select-option>
+                        <ion-select-option *ngIf="listaAutomovel.vidro_diant_dir == 4" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.vidro_diant_dir" value="4">Quebrado</ion-select-option>
+                        <ion-select-option *ngIf="listaAutomovel.vidro_diant_dir == 5" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.vidro_diant_dir" value="5">Trincado</ion-select-option>
+                        <ion-select-option *ngIf="listaAutomovel.vidro_diant_dir == 6" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.vidro_diant_dir" value="6">Amassado</ion-select-option>
+                        <ion-select-option *ngIf="listaAutomovel.vidro_diant_dir == 7" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.vidro_diant_dir" value="7">Impossível Vistoriar</ion-select-option>
+
+                        <ion-select-option *ngIf="listaAutomovel.vidro_diant_dir != 0 && listaAutomovel.vidro_diant_dir != 1" value="1">Avariado</ion-select-option>
+                        <ion-select-option *ngIf="listaAutomovel.vidro_diant_dir != 0 && listaAutomovel.vidro_diant_dir != 2" value="2">Risco</ion-select-option>
+                        <ion-select-option *ngIf="listaAutomovel.vidro_diant_dir != 0 && listaAutomovel.vidro_diant_dir != 3" value="3">Falta</ion-select-option>
+                        <ion-select-option *ngIf="listaAutomovel.vidro_diant_dir != 0 && listaAutomovel.vidro_diant_dir != 4" value="4">Quebrado</ion-select-option>
+                        <ion-select-option *ngIf="listaAutomovel.vidro_diant_dir != 0 && listaAutomovel.vidro_diant_dir != 5" value="5">Trincado</ion-select-option>
+                        <ion-select-option *ngIf="listaAutomovel.vidro_diant_dir != 0 && listaAutomovel.vidro_diant_dir != 6" value="6">Amassado</ion-select-option>
+                        <ion-select-option *ngIf="listaAutomovel.vidro_diant_dir != 0 && listaAutomovel.vidro_diant_dir != 7" value="7">Impossível Vistoriar</ion-select-option>
+                      </ion-select>
+                    </ion-item>
+
+            <ion-item>
+              <ion-label>Capô</ion-label>
+              <ion-select formControlName="capo" matInput [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.capo" [(ngModel)]="updateVeiculo.capo">
+                <ion-select-option *ngIf="listaAutomovel.capo == 1" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.capo" value="1">Avariado</ion-select-option>                  
+                <ion-select-option *ngIf="listaAutomovel.capo == 2" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.capo" value="2">Risco</ion-select-option>                       
+                <ion-select-option *ngIf="listaAutomovel.capo == 3" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.capo" value="3">Falta</ion-select-option>                        
+                <ion-select-option *ngIf="listaAutomovel.capo == 4" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.capo" value="4">Quebrado</ion-select-option>                       
+                <ion-select-option *ngIf="listaAutomovel.capo == 5" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.capo" value="5">Trincado</ion-select-option>                        
+                <ion-select-option *ngIf="listaAutomovel.capo == 6" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.capo" value="6">Amassado</ion-select-option>                        
+                <ion-select-option *ngIf="listaAutomovel.capo == 7" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.capo" value="7">Impossível Vistoriar</ion-select-option>
+               
+
+                <ion-select-option  *ngIf="listaAutomovel.capo != 0 && listaAutomovel.capo != 1" value="1">Avariado</ion-select-option>     
+                <ion-select-option *ngIf="listaAutomovel.capo != 0 && listaAutomovel.capo != 2" value="2">Risco</ion-select-option>                      
+                <ion-select-option *ngIf="listaAutomovel.capo != 0 && listaAutomovel.capo != 3" value="3">Falta</ion-select-option>                       
+                <ion-select-option *ngIf="listaAutomovel.capo != 0 && listaAutomovel.capo != 4" value="4">Quebrado</ion-select-option>                       
+                <ion-select-option *ngIf="listaAutomovel.capo != 0 && listaAutomovel.capo != 5" value="5">Trincado</ion-select-option>                       
+                <ion-select-option *ngIf="listaAutomovel.capo != 0 && listaAutomovel.capo != 6" value="6">Amassado</ion-select-option>
+                <ion-select-option *ngIf="listaAutomovel.capo != 0 && listaAutomovel.capo != 7" value="7">Impossível Vistoriar</ion-select-option>
+              </ion-select>
+              </ion-item>
+            
+              <ion-item>
+                <ion-label>Parabrisa</ion-label>
+                <ion-select formControlName="parabrisa" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.parabrisa" matInput [(ngModel)]="updateVeiculo.parabrisa">
+                  <ion-select-option *ngIf="listaAutomovel.parabrisa == 1" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.parabrisa" value="1">Avariado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.parabrisa == 2" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.parabrisa" value="2">Risco</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.parabrisa == 3" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.parabrisa" value="3">Falta</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.parabrisa == 4" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.parabrisa" value="4">Quebrado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.parabrisa == 5" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.parabrisa" value="5">Trincado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.parabrisa == 6" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.parabrisa" value="6">Amassado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.parabrisa == 7" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.parabrisa" value="7">Impossível Vistoriar</ion-select-option>
+
+                  <ion-select-option *ngIf="listaAutomovel.parabrisa != 0 && listaAutomovel.parabrisa != 1" value="1">Avariado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.parabrisa != 0 && listaAutomovel.parabrisa != 2" value="2">Risco</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.parabrisa != 0 && listaAutomovel.parabrisa != 3" value="3">Falta</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.parabrisa != 0 && listaAutomovel.parabrisa != 4" value="4">Quebrado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.parabrisa != 0 && listaAutomovel.parabrisa != 5" value="5">Trincado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.parabrisa != 0 && listaAutomovel.parabrisa != 6" value="6">Amassado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.parabrisa != 0 && listaAutomovel.parabrisa != 7" value="7">Impossível Vistoriar</ion-select-option>
+                </ion-select>
+              </ion-item>
+
+              <ion-item>
+                <ion-label>Retrovisor Direito</ion-label>
+                <ion-select formControlName="retrovisor_dir" [brmasker]="{mask:'', len:100}" matInput [value]="listaAutomovel.retrovisor_dir" [(ngModel)]="updateVeiculo.retrovisor_dir">
+                  <ion-select-option *ngIf="listaAutomovel.retrovisor_dir == 1" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.retrovisor_dir" value="1">Avariado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.retrovisor_dir == 2" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.retrovisor_dir" value="2">Risco</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.retrovisor_dir == 3" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.retrovisor_dir" value="3">Falta</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.retrovisor_dir == 4" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.retrovisor_dir" value="4">Quebrado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.retrovisor_dir == 5" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.retrovisor_dir" value="5">Trincado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.retrovisor_dir == 6" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.retrovisor_dir" value="6">Amassado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.retrovisor_dir == 7" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.retrovisor_dir" value="7">Impossível Vistoriar</ion-select-option>
+
+                  <ion-select-option *ngIf="listaAutomovel.retrovisor_dir != 0 && listaAutomovel.retrovisor_dir != 1"  value="1">Avariado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.retrovisor_dir != 0 && listaAutomovel.retrovisor_dir != 2"  value="2">Risco</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.retrovisor_dir != 0 && listaAutomovel.retrovisor_dir != 3"  value="3">Falta</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.retrovisor_dir != 0 && listaAutomovel.retrovisor_dir != 4"  value="4">Quebrado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.retrovisor_dir != 0 && listaAutomovel.retrovisor_dir != 5" value="5">Trincado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.retrovisor_dir != 0 && listaAutomovel.retrovisor_dir != 6"  value="6">Amassado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.retrovisor_dir != 0 && listaAutomovel.retrovisor_dir != 7" value="7">Impossível Vistoriar</ion-select-option>
+                </ion-select>
+              </ion-item>
+        
+              <ion-item>
+                <ion-label>Farol direito</ion-label>
+                <ion-select formControlName="farol_dir" [brmasker]="{mask:'', len:100}" matInput [value]="listaAutomovel.farol_dir" [(ngModel)]="updateVeiculo.farol_dir">
+                  <ion-select-option *ngIf="listaAutomovel.farol_dir == 1" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.farol_dir" value="1">Avariado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.farol_dir == 2" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.farol_dir" value="2">Risco</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.farol_dir == 3" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.farol_dir" value="3">Falta</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.farol_dir == 4" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.farol_dir" value="4">Quebrado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.farol_dir == 5" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.farol_dir" value="5">Trincado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.farol_dir == 6" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.farol_dir" value="6">Amassado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.farol_dir == 7" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.farol_dir" value="7">Impossível Vistoriar</ion-select-option>
+
+                  <ion-select-option *ngIf="listaAutomovel.farol_dir != 0 && listaAutomovel.farol_dir != 1" value="1">Avariado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.farol_dir != 0 && listaAutomovel.farol_dir != 2" value="2">Risco</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.farol_dir != 0 && listaAutomovel.farol_dir != 3" value="3">Falta</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.farol_dir != 0 && listaAutomovel.farol_dir != 4" value="4">Quebrado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.farol_dir != 0 && listaAutomovel.farol_dir != 5" value="5">Trincado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.farol_dir != 0 && listaAutomovel.farol_dir != 6" value="6">Amassado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.farol_dir != 0 && listaAutomovel.farol_dir != 7" value="7">Impossível Vistoriar</ion-select-option>
+                </ion-select>
+              </ion-item>
+
+              <ion-item>
+                <ion-label>Lateral traseira Esquerda</ion-label>
+                <ion-select formControlName="lateral_tras" [brmasker]="{mask:'', len:100}" matInput [value]="listaAutomovel.lateral_tras" [(ngModel)]="updateVeiculo.lateral_tras">
+                  <ion-select-option *ngIf="listaAutomovel.lateral_tras == 1" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.lateral_tras"  value="1">Avariado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.lateral_tras == 2" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.lateral_tras" value="2">Risco</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.lateral_tras == 3" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.lateral_tras" value="3">Falta</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.lateral_tras == 4" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.lateral_tras" value="4">Quebrado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.lateral_tras == 5" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.lateral_tras" value="5">Trincado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.lateral_tras == 6" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.lateral_tras" value="6">Amassado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.lateral_tras == 7" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.lateral_tras" value="7">Impossível Vistoriar</ion-select-option>
+
+                  <ion-select-option *ngIf="listaAutomovel.lateral_tras != 0 && listaAutomovel.lateral_tras != 1"  value="1">Avariado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.lateral_tras != 0 && listaAutomovel.lateral_tras != 2" value="2">Risco</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.lateral_tras != 0 && listaAutomovel.lateral_tras != 3" value="3">Falta</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.lateral_tras != 0 && listaAutomovel.lateral_tras != 4" value="4">Quebrado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.lateral_tras != 0 && listaAutomovel.lateral_tras != 5" value="5">Trincado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.lateral_tras != 0 && listaAutomovel.lateral_tras != 6" value="6">Amassado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.lateral_tras != 0 && listaAutomovel.lateral_tras != 7" value="7">Impossível Vistoriar</ion-select-option>
+                </ion-select>
+              </ion-item>
+        
+              <ion-item>
+                <ion-label>Vidro Traseiro Esquerdo</ion-label>
+                <ion-select formControlName="vidro_tras_esq" [brmasker]="{mask:'', len:100}" matInput [value]="listaAutomovel.vidro_tras_esq" [(ngModel)]="updateVeiculo.vidro_tras_esq">
+                  <ion-select-option *ngIf="listaAutomovel.vidro_tras_esq == 1" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.vidro_tras_esq" value="1">Avariado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.vidro_tras_esq == 2" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.vidro_tras_esq" value="2">Risco</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.vidro_tras_esq == 3" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.vidro_tras_esq" value="3">Falta</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.vidro_tras_esq == 4" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.vidro_tras_esq" value="4">Quebrado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.vidro_tras_esq == 5" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.vidro_tras_esq" value="5">Trincado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.vidro_tras_esq == 6" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.vidro_tras_esq" value="6">Amassado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.vidro_tras_esq == 7" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.vidro_tras_esq" value="7">Impossível Vistoriar</ion-select-option>
+
+                  <ion-select-option *ngIf="listaAutomovel.vidro_tras_esq != 0 && listaAutomovel.vidro_tras_esq != 1" value="1">Avariado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.vidro_tras_esq != 0 && listaAutomovel.vidro_tras_esq != 2" value="2">Risco</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.vidro_tras_esq != 0 && listaAutomovel.vidro_tras_esq != 3" value="3">Falta</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.vidro_tras_esq != 0 && listaAutomovel.vidro_tras_esq != 4" value="4">Quebrado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.vidro_tras_esq != 0 && listaAutomovel.vidro_tras_esq != 5" value="5">Trincado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.vidro_tras_esq != 0 && listaAutomovel.vidro_tras_esq != 6" value="6">Amassado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.vidro_tras_esq != 0 && listaAutomovel.vidro_tras_esq != 7" value="7">Impossível Vistoriar</ion-select-option>
+                </ion-select>
+              </ion-item>
+        
+              <ion-item>
+                <ion-label>Porta Traseira Esquerda</ion-label>
+                <ion-select formControlName="porta_tras_esq" [brmasker]="{mask:'', len:100}" matInput [value]="listaAutomovel.porta_tras_esq" [(ngModel)]="updateVeiculo.porta_tras_esq">
+                  <ion-select-option *ngIf="listaAutomovel.porta_tras_esq == 1" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.porta_tras_esq" value="1">Avariado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.porta_tras_esq == 2" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.porta_tras_esq" value="2">Risco</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.porta_tras_esq == 3" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.porta_tras_esq" value="3">Falta</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.porta_tras_esq == 4" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.porta_tras_esq" value="4">Quebrado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.porta_tras_esq == 5" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.porta_tras_esq" value="5">Trincado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.porta_tras_esq == 6" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.porta_tras_esq" value="6">Amassado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.porta_tras_esq == 7" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.porta_tras_esq" value="7">Impossível Vistoriar</ion-select-option>
+
+                  <ion-select-option *ngIf="listaAutomovel.porta_tras_esq != 0 && listaAutomovel.porta_tras_esq != 1" value="1">Avariado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.porta_tras_esq != 0 && listaAutomovel.porta_tras_esq != 2" value="2">Risco</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.porta_tras_esq != 0 && listaAutomovel.porta_tras_esq != 3" value="3">Falta</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.porta_tras_esq != 0 && listaAutomovel.porta_tras_esq != 4" value="4">Quebrado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.porta_tras_esq != 0 && listaAutomovel.porta_tras_esq != 5" value="5">Trincado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.porta_tras_esq != 0 && listaAutomovel.porta_tras_esq != 6" value="6">Amassado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.porta_tras_esq != 0 && listaAutomovel.porta_tras_esq != 7" value="7">Impossível Vistoriar</ion-select-option>
+                </ion-select>
+              </ion-item>
+
+              <ion-item>
+                <ion-label>Vidro Dianteiro Esquerdo</ion-label>
+                <ion-select formControlName="vidro_diant_esq" [brmasker]="{mask:'', len:100}" matInput [value]="listaAutomovel.vidro_diant_esq" [(ngModel)]="updateVeiculo.vidro_diant_esq">
+                  <ion-select-option *ngIf="listaAutomovel.vidro_diant_esq == 1" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.vidro_diant_esq" value="1">Avariado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.vidro_diant_esq == 2" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.vidro_diant_esq" value="2">Risco</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.vidro_diant_esq == 3" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.vidro_diant_esq" value="3">Falta</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.vidro_diant_esq == 4" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.vidro_diant_esq" value="4">Quebrado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.vidro_diant_esq == 5" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.vidro_diant_esq" value="5">Trincado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.vidro_diant_esq == 6" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.vidro_diant_esq" value="6">Amassado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.vidro_diant_esq == 7" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.vidro_diant_esq" value="7">Impossível Vistoriar</ion-select-option>
+
+                  <ion-select-option *ngIf="listaAutomovel.vidro_diant_esq != 0 && listaAutomovel.vidro_diant_esq != 1" value="1">Avariado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.vidro_diant_esq != 0 && listaAutomovel.vidro_diant_esq != 2" value="2">Risco</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.vidro_diant_esq != 0 && listaAutomovel.vidro_diant_esq != 3" value="3">Falta</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.vidro_diant_esq != 0 && listaAutomovel.vidro_diant_esq != 4" value="4">Quebrado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.vidro_diant_esq != 0 && listaAutomovel.vidro_diant_esq != 5" value="5">Trincado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.vidro_diant_esq != 0 && listaAutomovel.vidro_diant_esq != 6" value="6">Amassado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.vidro_diant_esq != 0 && listaAutomovel.vidro_diant_esq != 7" value="7">Impossível Vistoriar</ion-select-option>
+                </ion-select>
+              </ion-item>
+        
+              <ion-item>
+                <ion-label>Porta Dianteira Esquerda</ion-label>
+                <ion-select formControlName="porta_diant_esq" [brmasker]="{mask:'', len:100}" matInput [value]="listaAutomovel.porta_diant_esq" [(ngModel)]="updateVeiculo.porta_diant_esq">
+                  <ion-select-option *ngIf="listaAutomovel.porta_diant_esq == 1" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.porta_diant_esq" value="1">Avariado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.porta_diant_esq == 2" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.porta_diant_esq" value="2">Risco</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.porta_diant_esq == 3" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.porta_diant_esq" value="3">Falta</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.porta_diant_esq == 4" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.porta_diant_esq" value="4">Quebrado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.porta_diant_esq == 5" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.porta_diant_esq" value="5">Trincado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.porta_diant_esq == 6" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.porta_diant_esq" value="6">Amassado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.porta_diant_esq == 7" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.porta_diant_esq" value="7">Impossível Vistoriar</ion-select-option>
+
+                  <ion-select-option *ngIf="listaAutomovel.porta_diant_esq != 0 && listaAutomovel.porta_diant_esq != 1" value="1">Avariado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.porta_diant_esq != 0 && listaAutomovel.porta_diant_esq != 2" value="2">Risco</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.porta_diant_esq != 0 && listaAutomovel.porta_diant_esq != 3" value="3">Falta</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.porta_diant_esq != 0 && listaAutomovel.porta_diant_esq != 4" value="4">Quebrado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.porta_diant_esq != 0 && listaAutomovel.porta_diant_esq != 5" value="5">Trincado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.porta_diant_esq != 0 && listaAutomovel.porta_diant_esq != 6" value="6">Amassado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.porta_diant_esq != 0 && listaAutomovel.porta_diant_esq != 7" value="7">Impossível Vistoriar</ion-select-option>
+                </ion-select>
+              </ion-item>
+        
+              <ion-item>
+                <ion-label>Farol Esquerdo</ion-label>
+                <ion-select  formControlName="farol_esq" [brmasker]="{mask:'', len:100}" matInput [value]="listaAutomovel.farol_esq" [(ngModel)]="updateVeiculo.farol_esq">
+                  <ion-select-option *ngIf="listaAutomovel.farol_esq == 1" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.farol_esq" value="1">Avariado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.farol_esq == 2" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.farol_esq" value="2">Risco</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.farol_esq == 3" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.farol_esq" value="3">Falta</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.farol_esq == 4" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.farol_esq" value="4">Quebrado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.farol_esq == 5" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.farol_esq" value="5">Trincado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.farol_esq == 6" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.farol_esq" value="6">Amassado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.farol_esq == 7" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.farol_esq" value="7">Impossível Vistoriar</ion-select-option>
+
+                  <ion-select-option *ngIf="listaAutomovel.farol_esq != 0 && listaAutomovel.farol_esq != 1" value="1">Avariado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.farol_esq != 0 && listaAutomovel.farol_esq != 2" value="2">Risco</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.farol_esq != 0 && listaAutomovel.farol_esq != 3" value="3">Falta</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.farol_esq != 0 && listaAutomovel.farol_esq != 4" value="4">Quebrado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.farol_esq != 0 && listaAutomovel.farol_esq != 5" value="5">Trincado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.farol_esq != 0 && listaAutomovel.farol_esq != 6" value="6">Amassado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.farol_esq != 0 && listaAutomovel.farol_esq != 7" value="7">Impossível Vistoriar</ion-select-option>
+                </ion-select>
+              </ion-item>
+
+              <ion-item>
+                <ion-label>Retrovisor Esquerdo</ion-label>
+                <ion-select formControlName="retrovisor_esq" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.retrovisor_esq" matInput [(ngModel)]="updateVeiculo.retrovisor_esq">
+                  <ion-select-option *ngIf="listaAutomovel.retrovisor_esq == 1" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.retrovisor_esq" value="1">Avariado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.retrovisor_esq == 2" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.retrovisor_esq" value="2">Risco</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.retrovisor_esq == 3" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.retrovisor_esq" value="3">Falta</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.retrovisor_esq == 4" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.retrovisor_esq" value="4">Quebrado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.retrovisor_esq == 5" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.retrovisor_esq" value="5">Trincado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.retrovisor_esq == 6" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.retrovisor_esq" value="6">Amassado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.retrovisor_esq == 7" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.retrovisor_esq" value="7">Impossível Vistoriar</ion-select-option>
+
+                  <ion-select-option *ngIf="listaAutomovel.retrovisor_esq != 0 && listaAutomovel.retrovisor_esq != 1" value="1">Avariado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.retrovisor_esq != 0 && listaAutomovel.retrovisor_esq != 2" value="2">Risco</ion-select-option>
+                  <ion-select-option  *ngIf="listaAutomovel.retrovisor_esq != 0 && listaAutomovel.retrovisor_esq != 3" value="3">Falta</ion-select-option>
+                  <ion-select-option  *ngIf="listaAutomovel.retrovisor_esq != 0 && listaAutomovel.retrovisor_esq != 4" value="4">Quebrado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.retrovisor_esq != 0 && listaAutomovel.retrovisor_esq != 5" value="5">Trincado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.retrovisor_esq != 0 && listaAutomovel.retrovisor_esq != 6" value="6">Amassado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.retrovisor_esq != 0 && listaAutomovel.retrovisor_esq != 7" value="7">Impossível Vistoriar</ion-select-option>
+                </ion-select>
+              </ion-item>
+        
+              <ion-item>
+                <ion-label>Seta Esquerda</ion-label>
+                <ion-select formControlName="seta_esq" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.seta_esq"  matInput [(ngModel)]="updateVeiculo.seta_esq">
+                  <ion-select-option *ngIf="listaAutomovel.seta_esq == 1" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.seta_esq" value="1">Avariado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.seta_esq == 2" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.seta_esq" value="2">Risco</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.seta_esq == 3" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.seta_esq" value="3">Falta</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.seta_esq == 4" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.seta_esq" value="4">Quebrado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.seta_esq == 5" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.seta_esq" value="5">Trincado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.seta_esq == 6" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.seta_esq" value="6">Amassado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.seta_esq == 7" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.seta_esq" value="7">Impossível Vistoriar</ion-select-option>
+
+
+                  <ion-select-option *ngIf="listaAutomovel.seta_esq != 0 && listaAutomovel.seta_esq != 1" value="1">Avariado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.seta_esq != 0 && listaAutomovel.seta_esq != 2" value="2">Risco</ion-select-option>
+                  <ion-select-option  *ngIf="listaAutomovel.seta_esq != 0 && listaAutomovel.seta_esq != 3" value="3">Falta</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.seta_esq != 0 && listaAutomovel.seta_esq != 4" value="4">Quebrado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.seta_esq != 0 && listaAutomovel.seta_esq != 5" value="5">Trincado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.seta_esq != 0 && listaAutomovel.seta_esq != 6" value="6">Amassado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.seta_esq != 0 && listaAutomovel.seta_esq != 7" value="7">Impossível Vistoriar</ion-select-option>
+                </ion-select>
+              </ion-item>
+        
+              <ion-item>
+                <ion-label>Para-Choque</ion-label>
+                <ion-select formControlName="para_choque" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.para_choque" matInput [(ngModel)]="updateVeiculo.para_choque">
+                  <ion-select-option *ngIf="listaAutomovel.para_choque == 1" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.para_choque" value="1">Avariado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.para_choque == 2" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.para_choque" value="2">Risco</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.para_choque == 3" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.para_choque"  value="3">Falta</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.para_choque == 4" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.para_choque" value="4">Quebrado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.para_choque == 5" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.para_choque" value="5">Trincado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.para_choque == 6" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.para_choque" value="6">Amassado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.para_choque == 7" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.para_choque" value="7">Impossível Vistoriar</ion-select-option>
+
+                  <ion-select-option *ngIf="listaAutomovel.para_choque != 0 && listaAutomovel.para_choque != 1" value="1">Avariado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.para_choque != 0 && listaAutomovel.para_choque != 2" value="2">Risco</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.para_choque != 0 && listaAutomovel.para_choque != 3"  value="3">Falta</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.para_choque != 0 && listaAutomovel.para_choque != 4" value="4">Quebrado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.para_choque != 0 && listaAutomovel.para_choque != 5" value="5">Trincado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.para_choque != 0 && listaAutomovel.para_choque != 6" value="6">Amassado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.para_choque != 0 && listaAutomovel.para_choque != 7" value="7">Impossível Vistoriar</ion-select-option>
+                </ion-select>
+              </ion-item>
+
+              <ion-item>
+                <ion-label>Farolete Direito</ion-label>
+                <ion-select formControlName="farolete_dir" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.farolete_dir" matInput [(ngModel)]="updateVeiculo.farolete_dir">
+                  <ion-select-option *ngIf="listaAutomovel.farolete_dir == 1" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.farolete_dir" value="1">Avariado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.farolete_dir == 2" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.farolete_dir" value="2">Risco</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.farolete_dir == 3" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.farolete_dir" value="3">Falta</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.farolete_dir == 4" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.farolete_dir" value="4">Quebrado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.farolete_dir == 5" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.farolete_dir" value="5">Trincado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.farolete_dir == 6" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.farolete_dir" value="6">Amassado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.farolete_dir == 7" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.farolete_dir" value="7">Impossível Vistoriar</ion-select-option>
+
+                  <ion-select-option *ngIf="listaAutomovel.farolete_dir != 0 && listaAutomovel.farolete_dir != 1" value="1">Avariado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.farolete_dir != 0 && listaAutomovel.farolete_dir != 2" value="2">Risco</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.farolete_dir != 0 && listaAutomovel.farolete_dir != 3" value="3">Falta</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.farolete_dir != 0 && listaAutomovel.farolete_dir != 4" value="4">Quebrado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.farolete_dir != 0 && listaAutomovel.farolete_dir != 5" value="5">Trincado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.farolete_dir != 0 && listaAutomovel.farolete_dir != 6" value="6">Amassado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.farolete_dir != 0 && listaAutomovel.farolete_dir != 7" value="7">Impossível Vistoriar</ion-select-option>
+                </ion-select>
+              </ion-item>
+        
+              <ion-item>
+                <ion-label>Farolete Esquerdo</ion-label>
+                <ion-select formControlName="farolete_esq" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.farolete_esq" matInput [(ngModel)]="updateVeiculo.farolete_esq">
+                  <ion-select-option *ngIf="listaAutomovel.farolete_esq == 1" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.farolete_esq" value="1">Avariado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.farolete_esq == 2" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.farolete_esq" value="2">Risco</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.farolete_esq == 3" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.farolete_esq" value="3">Falta</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.farolete_esq == 4" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.farolete_esq" value="4">Quebrado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.farolete_esq == 5" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.farolete_esq" value="5">Trincado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.farolete_esq == 6" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.farolete_esq" value="6">Amassado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.farolete_esq == 7" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.farolete_esq" value="7">Impossível Vistoriar</ion-select-option>
+
+                  <ion-select-option *ngIf="listaAutomovel.farolete_esq != 0 && listaAutomovel.farolete_esq != 1" value="1">Avariado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.farolete_esq != 0 && listaAutomovel.farolete_esq != 2" value="2">Risco</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.farolete_esq != 0 && listaAutomovel.farolete_esq != 3" value="3">Falta</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.farolete_esq != 0 && listaAutomovel.farolete_esq != 4" value="4">Quebrado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.farolete_esq != 0 && listaAutomovel.farolete_esq != 5" value="5">Trincado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.farolete_esq != 0 && listaAutomovel.farolete_esq != 6" value="6">Amassado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.farolete_esq != 0 && listaAutomovel.farolete_esq != 7" value="7">Impossível Vistoriar</ion-select-option>
+                </ion-select>
+              </ion-item>
+        
+              <ion-item>
+                <ion-label>Vidro Traseiro</ion-label>
+                <ion-select formControlName="vidro_tras" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.vidro_tras" matInput [(ngModel)]="updateVeiculo.vidro_tras">
+                  <ion-select-option *ngIf="listaAutomovel.vidro_tras == 1" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.vidro_tras" value="1">Avariado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.vidro_tras == 2" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.vidro_tras" value="2">Risco</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.vidro_tras == 3" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.vidro_tras" value="3">Falta</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.vidro_tras == 4" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.vidro_tras" value="4">Quebrado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.vidro_tras == 5" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.vidro_tras" value="5">Trincado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.vidro_tras == 6" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.vidro_tras" value="6">Amassado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.vidro_tras == 7" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.vidro_tras" value="7">Impossível Vistoriar</ion-select-option>
+
+                  <ion-select-option *ngIf="listaAutomovel.vidro_tras != 0 && listaAutomovel.vidro_tras != 1" value="1">Avariado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.vidro_tras != 0 && listaAutomovel.vidro_tras != 2" value="2">Risco</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.vidro_tras != 0 && listaAutomovel.vidro_tras != 3" value="3">Falta</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.vidro_tras != 0 && listaAutomovel.vidro_tras != 4" value="4">Quebrado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.vidro_tras != 0 && listaAutomovel.vidro_tras != 5" value="5">Trincado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.vidro_tras != 0 && listaAutomovel.vidro_tras != 6" value="6">Amassado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.vidro_tras != 0 && listaAutomovel.vidro_tras != 7" value="7">Impossível Vistoriar</ion-select-option>
+                </ion-select>
+              </ion-item>
+
+              <ion-item>
+                <ion-label>Traseira</ion-label>
+                <ion-select formControlName="traseira" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.traseira" matInput [(ngModel)]="updateVeiculo.traseira">
+                  <ion-select-option *ngIf="listaAutomovel.traseira == 1" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.traseira" value="1">Avariado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.traseira == 2" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.traseira" value="2">Risco</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.traseira == 3" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.traseira" value="3">Falta</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.traseira == 4" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.traseira" value="4">Quebrado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.traseira == 5" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.traseira" value="5">Trincado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.traseira == 6" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.traseira" value="6">Amassado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.traseira == 7" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.traseira" value="7">Impossível Vistoriar</ion-select-option>
+
+                  <ion-select-option *ngIf="listaAutomovel.traseira != 0 && listaAutomovel.traseira != 1" value="1">Avariado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.traseira != 0 && listaAutomovel.traseira != 2" value="2">Risco</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.traseira != 0 && listaAutomovel.traseira != 3" value="3">Falta</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.traseira != 0 && listaAutomovel.traseira != 4" value="4">Quebrado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.traseira != 0 && listaAutomovel.traseira != 5" value="5">Trincado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.traseira != 0 && listaAutomovel.traseira != 6" value="6">Amassado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.traseira != 0 && listaAutomovel.traseira != 7" value="7">Impossível Vistoriar</ion-select-option>
+                </ion-select>
+              </ion-item>
+        
+              <ion-item>
+                <ion-label>Porta Malas</ion-label>
+                <ion-select formControlName="tam_porta_malas" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.tam_porta_malas" matInput [(ngModel)]="updateVeiculo.tam_porta_malas">
+                  <ion-select-option *ngIf="listaAutomovel.tam_porta_malas == 1" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.tam_porta_malas" value="1">Avariado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.tam_porta_malas == 2" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.tam_porta_malas" value="2">Risco</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.tam_porta_malas == 3" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.tam_porta_malas" value="3">Falta</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.tam_porta_malas == 4" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.tam_porta_malas" value="4">Quebrado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.tam_porta_malas == 5" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.tam_porta_malas" value="5">Trincado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.tam_porta_malas == 6" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.tam_porta_malas" value="6">Amassado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.tam_porta_malas == 7" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.tam_porta_malas" value="7">Impossível Vistoriar</ion-select-option>
+
+                  <ion-select-option *ngIf="listaAutomovel.tam_porta_malas != 0 && listaAutomovel.tam_porta_malas != 1" value="1">Avariado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.tam_porta_malas != 0 && listaAutomovel.tam_porta_malas != 2" value="2">Risco</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.tam_porta_malas != 0 && listaAutomovel.tam_porta_malas != 3" value="3">Falta</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.tam_porta_malas != 0 && listaAutomovel.tam_porta_malas != 4" value="4">Quebrado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.tam_porta_malas != 0 && listaAutomovel.tam_porta_malas != 5" value="5">Trincado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.tam_porta_malas != 0 && listaAutomovel.tam_porta_malas != 6" value="6">Amassado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.tam_porta_malas != 0 && listaAutomovel.tam_porta_malas != 7" value="7">Impossível Vistoriar</ion-select-option>
+                </ion-select>
+              </ion-item>
+  
+              <ion-item>
+                <ion-label>Vidro Traseiro</ion-label>
+                <ion-select formControlName="vidro_tras2" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.vidro_tras2" matInput [(ngModel)]="updateVeiculo.vidro_tras2">
+                  <ion-select-option *ngIf="listaAutomovel.vidro_tras2 == 1" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.vidro_tras2" value="1">Avariado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.vidro_tras2 == 2" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.vidro_tras2" value="2">Risco</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.vidro_tras2 == 3" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.vidro_tras2" value="3">Falta</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.vidro_tras2 == 4" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.vidro_tras2" value="4">Quebrado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.vidro_tras2 == 5" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.vidro_tras2" value="5">Trincado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.vidro_tras2 == 6" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.vidro_tras2" value="6">Amassado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.vidro_tras2 == 7" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.vidro_tras2" value="7">Impossível Vistoriar</ion-select-option>
+
+                  <ion-select-option *ngIf="listaAutomovel.vidro_tras2 != 0 && listaAutomovel.vidro_tras2 != 1" value="1">Avariado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.vidro_tras2 != 0 && listaAutomovel.vidro_tras2 != 2" value="2">Risco</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.vidro_tras2 != 0 && listaAutomovel.vidro_tras2 != 3" value="3">Falta</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.vidro_tras2 != 0 && listaAutomovel.vidro_tras2 != 4" value="4">Quebrado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.vidro_tras2 != 0 && listaAutomovel.vidro_tras2 != 5" value="5">Trincado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.vidro_tras2 != 0 && listaAutomovel.vidro_tras2 != 6" value="6">Amassado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.vidro_tras2 != 0 && listaAutomovel.vidro_tras2 != 7" value="7">Impossível Vistoriar</ion-select-option>
+                </ion-select>
+              </ion-item>
+
+              <ion-item >
+                <ion-label>Teto</ion-label>
+                <ion-select formControlName="teto" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.teto" matInput [(ngModel)]="updateVeiculo.teto">
+                  <ion-select-option *ngIf="listaAutomovel.teto == 1" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.teto" value="1">Avariado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.teto == 2" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.teto" value="2">Risco</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.teto == 3" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.teto" value="3">Falta</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.teto == 4" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.teto" value="4">Quebrado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.teto == 5" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.teto" value="5">Trincado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.teto == 6" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.teto" value="6">Amassado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.teto == 7" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.teto" value="7">Impossível Vistoriar</ion-select-option>
+
+                  <ion-select-option *ngIf="listaAutomovel.teto != 0 && listaAutomovel.teto != 1" value="1">Avariado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.teto != 0 && listaAutomovel.teto != 2" value="2">Risco</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.teto != 0 && listaAutomovel.teto != 3" value="3">Falta</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.teto != 0 && listaAutomovel.teto != 4" value="4">Quebrado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.teto != 0 && listaAutomovel.teto != 5" value="5">Trincado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.teto != 0 && listaAutomovel.teto != 6" value="6">Amassado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.teto != 0 && listaAutomovel.teto != 7" value="7">Impossível Vistoriar</ion-select-option>
+                </ion-select>
+              </ion-item>
+            
+  
+                <ion-item >
+                  <ion-label>Capô</ion-label>
+                  <ion-select formControlName="capo2" [brmasker]="{mask:'', len:100}" matInput [value]="listaAutomovel.capo2" [(ngModel)]="updateVeiculo.capo2">
+                    <ion-select-option *ngIf="listaAutomovel.capo2 == 1" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.capo2" value="1">Avariado</ion-select-option>
+                    <ion-select-option *ngIf="listaAutomovel.capo2 == 2" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.capo2" value="2">Risco</ion-select-option>
+                    <ion-select-option *ngIf="listaAutomovel.capo2 == 3" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.capo2" value="3">Falta</ion-select-option>
+                    <ion-select-option *ngIf="listaAutomovel.capo2 == 4" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.capo2" value="4">Quebrado</ion-select-option>
+                    <ion-select-option *ngIf="listaAutomovel.capo2 == 5" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.capo2" value="5">Trincado</ion-select-option>
+                    <ion-select-option *ngIf="listaAutomovel.capo2 == 6" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.capo2" value="6">Amassado</ion-select-option>
+                    <ion-select-option *ngIf="listaAutomovel.capo2 == 7" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.capo2" value="7">Impossível Vistoriar</ion-select-option>
+
+                    <ion-select-option *ngIf="listaAutomovel.capo2 != 0 && listaAutomovel.capo2 != 1" value="1">Avariado</ion-select-option>
+                    <ion-select-option *ngIf="listaAutomovel.capo2 != 0 && listaAutomovel.capo2 != 2" value="2">Risco</ion-select-option>
+                    <ion-select-option *ngIf="listaAutomovel.capo2 != 0 && listaAutomovel.capo2 != 3" value="3">Falta</ion-select-option>
+                    <ion-select-option *ngIf="listaAutomovel.capo2 != 0 && listaAutomovel.capo2 != 4" value="4">Quebrado</ion-select-option>
+                    <ion-select-option *ngIf="listaAutomovel.capo2 != 0 && listaAutomovel.capo2 != 5" value="5">Trincado</ion-select-option>
+                    <ion-select-option *ngIf="listaAutomovel.capo2 != 0 && listaAutomovel.capo2 != 6" value="6">Amassado</ion-select-option>
+                    <ion-select-option *ngIf="listaAutomovel.capo2 != 0 && listaAutomovel.capo2 != 7" value="7">Impossível Vistoriar</ion-select-option>
+                  </ion-select>
+                </ion-item>
+  
+              <ion-item >
+                <ion-label>Roda Traseira Esquerda</ion-label>
+                <ion-select formControlName="roda_tras_esq" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.roda_tras_esq" matInput [(ngModel)]="updateVeiculo.roda_tras_esq">
+                  <ion-select-option *ngIf="listaAutomovel.roda_tras_esq == 1" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.roda_tras_esq" value="1">Avariado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.roda_tras_esq == 2" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.roda_tras_esq" value="2">Risco</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.roda_tras_esq == 3" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.roda_tras_esq" value="3">Falta</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.roda_tras_esq == 4" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.roda_tras_esq" value="4">Quebrado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.roda_tras_esq == 5" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.roda_tras_esq" value="5">Trincado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.roda_tras_esq == 6" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.roda_tras_esq" value="6">Amassado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.roda_tras_esq == 7" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.roda_tras_esq" value="7">Impossível Vistoriar</ion-select-option>
+
+                  <ion-select-option *ngIf="listaAutomovel.roda_tras_esq != 0 && listaAutomovel.roda_tras_esq != 1" value="1">Avariado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.roda_tras_esq != 0 && listaAutomovel.roda_tras_esq != 2" value="2">Risco</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.roda_tras_esq != 0 && listaAutomovel.roda_tras_esq != 3" value="3">Falta</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.roda_tras_esq != 0 && listaAutomovel.roda_tras_esq != 4" value="4">Quebrado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.roda_tras_esq != 0 && listaAutomovel.roda_tras_esq != 5" value="5">Trincado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.roda_tras_esq != 0 && listaAutomovel.roda_tras_esq != 6" value="6">Amassado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.roda_tras_esq != 0 && listaAutomovel.roda_tras_esq != 7" value="7">Impossível Vistoriar</ion-select-option>
+                </ion-select>
+              </ion-item>
+
+              <ion-item>
+                <ion-label>Roda Dianteira Esquerda</ion-label>
+                <ion-select formControlName="roda_diant_esq" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.roda_diant_esq" matInput [(ngModel)]="updateVeiculo.roda_diant_esq">
+                  <ion-select-option *ngIf="listaAutomovel.roda_diant_esq == 1" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.roda_diant_esq" value="1">Avariado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.roda_diant_esq == 2" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.roda_diant_esq" value="2">Risco</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.roda_diant_esq == 3" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.roda_diant_esq" value="3">Falta</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.roda_diant_esq == 4" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.roda_diant_esq" value="4">Quebrado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.roda_diant_esq == 5" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.roda_diant_esq" value="5">Trincado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.roda_diant_esq == 6" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.roda_diant_esq" value="6">Amassado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.roda_diant_esq == 7" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.roda_diant_esq" value="7">Impossível Vistoriar</ion-select-option>
+
+                  <ion-select-option *ngIf="listaAutomovel.roda_diant_esq != 0 && listaAutomovel.roda_diant_esq != 1" value="1">Avariado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.roda_diant_esq != 0 && listaAutomovel.roda_diant_esq != 2" value="2">Risco</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.roda_diant_esq != 0 && listaAutomovel.roda_diant_esq != 3" value="3">Falta</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.roda_diant_esq != 0 && listaAutomovel.roda_diant_esq != 4" value="4">Quebrado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.roda_diant_esq != 0 && listaAutomovel.roda_diant_esq != 5" value="5">Trincado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.roda_diant_esq != 0 && listaAutomovel.roda_diant_esq != 6" value="6">Amassado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.roda_diant_esq != 0 && listaAutomovel.roda_diant_esq != 7" value="7">Impossível Vistoriar</ion-select-option>
+                </ion-select>
+              </ion-item>
+  
+              <ion-item >
+                <ion-label>Lateral Dianteira Esquerda</ion-label>
+                <ion-select formControlName="lateral_diant_esq" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.lateral_diant_esq" matInput [(ngModel)]="updateVeiculo.lateral_diant_esq">
+                  <ion-select-option *ngIf="listaAutomovel.lateral_diant_esq == 1" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.lateral_diant_esq" value="1">Avariado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.lateral_diant_esq == 2" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.lateral_diant_esq" value="2">Risco</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.lateral_diant_esq == 3" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.lateral_diant_esq" value="3">Falta</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.lateral_diant_esq == 4" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.lateral_diant_esq" value="4">Quebrado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.lateral_diant_esq == 5" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.lateral_diant_esq" value="5">Trincado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.lateral_diant_esq == 6" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.lateral_diant_esq" value="6">Amassado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.lateral_diant_esq == 7" [brmasker]="{mask:'', len:100}" [value]="listaAutomovel.lateral_diant_esq" value="7">Impossível Vistoriar</ion-select-option>
+
+                  <ion-select-option *ngIf="listaAutomovel.lateral_diant_esq != 0 && listaAutomovel.lateral_diant_esq != 1" value="1">Avariado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.lateral_diant_esq != 0 && listaAutomovel.lateral_diant_esq != 2" value="2">Risco</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.lateral_diant_esq != 0 && listaAutomovel.lateral_diant_esq != 3" value="3">Falta</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.lateral_diant_esq != 0 && listaAutomovel.lateral_diant_esq != 4" value="4">Quebrado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.lateral_diant_esq != 0 && listaAutomovel.lateral_diant_esq != 5" value="5">Trincado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.lateral_diant_esq != 0 && listaAutomovel.lateral_diant_esq != 6" value="6">Amassado</ion-select-option>
+                  <ion-select-option *ngIf="listaAutomovel.lateral_diant_esq != 0 && listaAutomovel.lateral_diant_esq != 7" value="7">Impossível Vistoriar</ion-select-option>
+                </ion-select>
+              </ion-item>
+            
+            <ion-button  class="botaoNovo"  type="submit"  >Atualizar</ion-button>   <ion-button  class="botaoNovo"  (click)="onDelete()">Deletar</ion-button>
+          </ion-card-content>
+          </ion-card>          
+      </form>
+    </ion-card>
+
+<!---------------------------------------------------------->
+
+
+    
+
+</ion-content> 
+    
+    

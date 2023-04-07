@@ -1,0 +1,73 @@
+<ion-app >
+<!--ion-app-->
+  <!--criar o ion-menu // nesse ion-menu deve ter um id-->
+  <ion-menu id="main-menu" contentId="menu" >
+    <!--depois ele cria um ion-header-->
+    <ion-header>
+      <!--agora vem o ion-toolbar-->
+      <ion-toolbar color="success">
+        <!--ele cria o titulo-->
+        <ion-title>
+          Menu
+        </ion-title>
+      </ion-toolbar>
+    </ion-header>
+
+    <!--agora vem o conteudo-->
+    <ion-content>
+      <!--agora é criada uma lista-->
+      <ion-list>
+       <!--ion menu toogle para fixa a tela que for selecinada no meu-->
+       <ion-menu-toggle>
+           <!--agora vem os items da lista-->
+        <ion-item routerLink='/cadastrar-veiculo'>
+          <!--criação dos icones e labels-->
+          <ion-icon name="car-sharp" slot="start"></ion-icon>
+          <ion-label>Cadastro de Automovel e Caminhão</ion-label>
+        </ion-item>
+       </ion-menu-toggle>
+
+       <ion-menu-toggle>
+        <!--agora vem os items da lista-->
+     <ion-item routerLink='/cadastrar-motocicleta'>
+       <!--criação dos icones e labels-->
+       <ion-icon name="bicycle" slot="start"></ion-icon>
+       <ion-label>Cadastro de Motocicleta</ion-label>
+     </ion-item>
+    </ion-menu-toggle>
+
+    <ion-menu-toggle>
+      <!--agora vem os items da lista-->
+   <ion-item routerLink='/update-veiculo'>
+     <!--criação dos icones e labels-->
+     <ion-icon name="construct" slot="start"></ion-icon>
+     <ion-label>Atualizar Checklist Automovel</ion-label>
+   </ion-item>
+  </ion-menu-toggle>
+
+  <ion-menu-toggle>
+    <!--agora vem os items da lista-->
+ <ion-item routerLink='/update-motocicleta'>
+   <!--criação dos icones e labels-->
+   <ion-icon name="construct" slot="start"></ion-icon>
+   <ion-label>Atualizar Checklist Motocicleta</ion-label>
+ </ion-item>
+</ion-menu-toggle>
+
+        <!--agora é só replicar o item de cima aqui embaixo-->
+
+        <ion-menu-toggle>
+          <ion-item routerLink='/relatorio-veiculo'>
+            <ion-icon name='clipboard-outline' slot="start"></ion-icon>
+            <ion-label>Relatorios</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+      </ion-list>
+    </ion-content>
+
+  </ion-menu>
+
+
+
+  <ion-router-outlet id="menu"></ion-router-outlet>
+</ion-app>

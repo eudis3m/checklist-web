@@ -1,0 +1,623 @@
+<ion-content [fullscreen]="true">
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Cadastrar Motocicleta</ion-title>
+  </ion-toolbar>
+</ion-header>
+<form  [formGroup]="Group" (ngSubmit)="onSubmit()" OnUnload="destroy()">
+  <ion-card>
+    <ion-card-content>
+      <ion-item lines="full">
+        <ion-label position="floating">Solicitante</ion-label>
+        <ion-input matInput type='text'  formControlName="solicitante" [(ngModel)]="cadastrarMotocicleta.solicitante" ></ion-input> 
+      </ion-item>
+
+      <ion-item lines="full">
+        <ion-label position="floating">Entrada</ion-label>
+        <ion-input matInput type='date'  formControlName="entrada" [(ngModel)]="cadastrarMotocicleta.entrada" ></ion-input> 
+      </ion-item>
+
+      <ion-item lines="full">
+        <ion-label position="floating">Proprietario</ion-label>
+        <ion-input type='text'  formControlName="proprietario" matInput [(ngModel)]="cadastrarMotocicleta.proprietario"></ion-input>
+      </ion-item>
+
+      <ion-item lines="full">
+        <ion-label position="floating">veiculo</ion-label>
+        <ion-input type='text'  formControlName="veiculo" [brmasker]="{mask:'', len:100, userCaracters: false}"  matInput [(ngModel)]="cadastrarMotocicleta.veiculo"></ion-input>
+      </ion-item>
+
+      <ion-item lines="full">
+        <ion-label position="floating">Chassi</ion-label>
+        <ion-input type='text'  formControlName="chassi"  matInput [(ngModel)]="cadastrarMotocicleta.chassi"></ion-input>
+      </ion-item>
+
+      <ion-item lines="full">
+        <ion-label position="floating">Local</ion-label>
+        <ion-input type='text'  formControlName="local"  matInput [(ngModel)]="cadastrarMotocicleta.local"></ion-input>
+      </ion-item>
+
+      <ion-item lines="full">
+        <ion-label position="floating">Atraves de</ion-label>
+        <ion-input type='text'  formControlName="atravesDE" matInput [(ngModel)]="cadastrarMotocicleta.atravesDE"></ion-input>
+      </ion-item>
+
+      <ion-item lines="full">
+        <ion-label position="floating">Telefone</ion-label>
+        <ion-input type='tel'  formControlName="telefone" matInput  [brmasker]="{phone: true}" [(ngModel)]="cadastrarMotocicleta.telefone"></ion-input>
+      </ion-item>
+
+      <ion-item lines="full">
+        <ion-label position="floating">Renavam</ion-label>
+        <ion-input type='numeric'  formControlName="renavam" matInput [(ngModel)]="cadastrarMotocicleta.renavam"></ion-input>
+      </ion-item>
+
+      <ion-item lines="full">
+        <ion-label position="floating">Bairro</ion-label>
+        <ion-input type='text'  formControlName="bairro"  matInput [(ngModel)]="cadastrarMotocicleta.bairro"></ion-input>
+      </ion-item>
+
+      <ion-item lines="full">
+        <ion-label position="floating">CPF/CNPJ</ion-label>
+        <ion-input type='numeric'   formControlName="cpf_cnpj" matInput [brmasker]="{person: true}" [(ngModel)]="cadastrarMotocicleta.cpf_cnpj"></ion-input>
+      </ion-item>
+
+      <ion-item lines="full">
+        <ion-label position="floating">Cor</ion-label>
+        <ion-input type='text'   formControlName="cor"  matInput [(ngModel)]="cadastrarMotocicleta.cor"></ion-input>
+      </ion-item>
+
+      <ion-item lines="full">
+        <ion-label position="floating">Placa</ion-label>
+        <ion-input type='text' formControlName="placa" matInput [brmasker]="{mask:'###-####', len:8, userCaracters: true}" [(ngModel)]="cadastrarMotocicleta.placa"></ion-input>
+         <ion-error *ngIf="Group.get('placa').errors?.cadastroErro">
+         Veículo já cadastrado
+         </ion-error>
+      </ion-item>
+
+      <ion-item lines="full">
+        <ion-label position="floating">Produto</ion-label>
+        <ion-input type='text'  formControlName="produto" matInput [(ngModel)]="cadastrarMotocicleta.produto"></ion-input>
+      </ion-item>
+
+      <ion-item lines="full">
+        <ion-label position="floating">Cidade</ion-label>
+        <ion-input type='text'  formControlName="cidade" matInput [(ngModel)]="cadastrarMotocicleta.cidade"></ion-input>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-label position="floating">UF</ion-label>
+        <ion-input type='text'  formControlName="uf" matInput [(ngModel)]="cadastrarMotocicleta.uf"></ion-input>
+      </ion-item>
+      <ion-list lines="full">
+        <ion-radio-group value="biff" matInput   formControlName="guincho" [(ngModel)]="cadastrarMotocicleta.guincho">
+          <ion-list-header>
+            <ion-label>Guincho</ion-label>
+          </ion-list-header>
+
+          <ion-item>
+            <ion-label>Sim</ion-label>
+            <ion-radio  type='text' [checked]="selected" slot="start" value="Sim" ></ion-radio>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Não</ion-label>
+            <ion-radio type='text' [checked]="selected" slot="start" value="Não"  ></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+      </ion-list>
+
+      <ion-list lines="full">
+        <ion-radio-group value="biff" formControlName="documento" matInput [(ngModel)]="cadastrarMotocicleta.documento">
+          <ion-list-header>
+            <ion-label>Documento</ion-label>
+          </ion-list-header>
+
+          <ion-item>
+            <ion-label>Sim</ion-label>
+            <ion-radio slot="start" value="Sim" type='text' [checked]="selected"></ion-radio>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Não</ion-label>
+            <ion-radio slot="start" value="Não"  type='text' [checked]="selected"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+      </ion-list>
+
+      <ion-list lines="full">
+        <ion-radio-group value="biff" formControlName="bagagito"  matInput [(ngModel)]="cadastrarMotocicleta.bagagito">
+          <ion-list-header>
+            <ion-label>Bagagito</ion-label>
+          </ion-list-header>
+
+          <ion-item>
+            <ion-label>Sim</ion-label>
+            <ion-radio slot="start" value="Sim" type='text' [checked]="selected"></ion-radio>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Não</ion-label>
+            <ion-radio slot="start" value="Não" type='text' [checked]="selected"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+      </ion-list>
+
+      <ion-list lines="full">
+        <ion-radio-group value="biff" formControlName="retrovisor_eletrico"  matInput [(ngModel)]="cadastrarMotocicleta.retrovisor_eletrico">
+          <ion-list-header>
+            <ion-label>Retrovisor Eletrico</ion-label>
+          </ion-list-header>
+
+          <ion-item>
+            <ion-label>Sim</ion-label>
+            <ion-radio slot="start" value="Sim" type='text' [checked]="selected"></ion-radio>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Não</ion-label>
+            <ion-radio slot="start" value="Não" type='text' [checked]="selected"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+      </ion-list>
+
+      <ion-list lines="full">
+        <ion-radio-group value="biff" formControlName="retrovisor_comum"  matInput [(ngModel)]="cadastrarMotocicleta.retrovisor_comum">
+          <ion-list-header>
+            <ion-label>Retrovisor Comum</ion-label>
+          </ion-list-header>
+
+          <ion-item>
+            <ion-label>Sim</ion-label>
+            <ion-radio slot="start" value="Sim" type='text' [checked]="selected"></ion-radio>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Não</ion-label>
+            <ion-radio slot="start" value="Não" type='text' [checked]="selected"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+      </ion-list>
+
+      <ion-list lines="full">
+        <ion-radio-group value="biff" formControlName="farois_auxiliares"  matInput [(ngModel)]="cadastrarMotocicleta.farois_auxiliares">
+          <ion-list-header>
+            <ion-label>Farois Auxiliares</ion-label>
+          </ion-list-header>
+
+          <ion-item>
+            <ion-label>Sim</ion-label>
+            <ion-radio slot="start" value="Sim" type='text' [checked]="selected"></ion-radio>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Não</ion-label>
+            <ion-radio slot="start" value="Não" type='text' [checked]="selected"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+      </ion-list>
+
+      <ion-list lines="full">
+        <ion-radio-group value="biff" formControlName="rodas_comum"  matInput [(ngModel)]="cadastrarMotocicleta.rodas_comum">
+          <ion-list-header>
+            <ion-label>Rodas Comuns</ion-label>
+          </ion-list-header>
+
+          <ion-item>
+            <ion-label>Sim</ion-label>
+            <ion-radio slot="start" value="Sim" type='text' [checked]="selected"></ion-radio>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Não</ion-label>
+            <ion-radio slot="start" value="Não" type='text' [checked]="selected"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+      </ion-list>
+
+      <ion-list lines="full">
+        <ion-radio-group value="biff" formControlName="buzinas"  matInput [(ngModel)]="cadastrarMotocicleta.buzinas">
+          <ion-list-header>
+            <ion-label>Buzinas</ion-label>
+          </ion-list-header>
+
+          <ion-item>
+            <ion-label>Sim</ion-label>
+            <ion-radio slot="start" value="Sim" type='text' [checked]="selected"></ion-radio>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Não</ion-label>
+            <ion-radio slot="start" value="Não" type='text' [checked]="selected"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+      </ion-list>
+
+      <ion-list lines="full">
+        <ion-radio-group value="biff" formControlName="rodas_de_liga"  matInput [(ngModel)]="cadastrarMotocicleta.rodas_de_liga">
+          <ion-list-header>
+            <ion-label>Rodas de Liga Leve</ion-label>
+          </ion-list-header>
+
+          <ion-item>
+            <ion-label>Sim</ion-label>
+            <ion-radio slot="start" value="Sim" type='text' [checked]="selected"></ion-radio>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Não</ion-label>
+            <ion-radio slot="start" value="Não" type='text' [checked]="selected"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+      </ion-list>
+
+      <ion-list lines="full">
+        <ion-radio-group value="biff" formControlName="radio_toca_cds"  matInput [(ngModel)]="cadastrarMotocicleta.radio_toca_cds">
+          <ion-list-header>
+            <ion-label>Radio Toca CDS</ion-label>
+          </ion-list-header>
+
+          <ion-item>
+            <ion-label>Sim</ion-label>
+            <ion-radio slot="start" value="Sim" type='text' [checked]="selected"></ion-radio>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Não</ion-label>
+            <ion-radio slot="start" value="Não" type='text' [checked]="selected"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+      </ion-list>
+
+      <ion-list lines="full">
+        <ion-radio-group value="biff" formControlName="amplificador"  matInput [(ngModel)]="cadastrarMotocicleta.amplificador">
+          <ion-list-header>
+            <ion-label>Amplificador</ion-label>
+          </ion-list-header>
+
+          <ion-item>
+            <ion-label>Sim</ion-label>
+            <ion-radio slot="start" value="Sim" type='text' [checked]="selected"></ion-radio>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Não</ion-label>
+            <ion-radio slot="start" value="Não" type='text' [checked]="selected"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+      </ion-list>
+
+      <ion-list lines="full">
+        <ion-radio-group value="biff" formControlName="buzinas"  matInput [(ngModel)]="cadastrarMotocicleta.buzinas">
+          <ion-list-header>
+            <ion-label>Buzinas</ion-label>
+          </ion-list-header>
+
+          <ion-item>
+            <ion-label>Sim</ion-label>
+            <ion-radio slot="start" value="Sim" type='text' [checked]="selected"></ion-radio>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Não</ion-label>
+            <ion-radio slot="start" value="Não" type='text' [checked]="selected"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+      </ion-list>
+
+      <ion-list lines="full">
+        <ion-radio-group value="biff" formControlName="bateria"  matInput [(ngModel)]="cadastrarMotocicleta.bateria">
+          <ion-list-header>
+            <ion-label>Bateria</ion-label>
+          </ion-list-header>
+
+          <ion-item>
+            <ion-label>Sim</ion-label>
+            <ion-radio slot="start" value="Sim" type='text' [checked]="selected"></ion-radio>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Não</ion-label>
+            <ion-radio slot="start" value="Não" type='text' [checked]="selected"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+      </ion-list>
+
+      <ion-list lines="full">
+        <ion-radio-group value="biff" formControlName="alarme"  matInput [(ngModel)]="cadastrarMotocicleta.alarme">
+          <ion-list-header>
+            <ion-label>Alarme</ion-label>
+          </ion-list-header>
+
+          <ion-item>
+            <ion-label>Sim</ion-label>
+            <ion-radio slot="start" value="Sim" type='text' [checked]="selected"></ion-radio>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Não</ion-label>
+            <ion-radio slot="start" value="Não" type='text' [checked]="selected"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+      </ion-list>
+      <ion-list lines="full">
+        <ion-radio-group value="biff" formControlName="mata_cachorro"  matInput [(ngModel)]="cadastrarMotocicleta.mata_cachorro">
+          <ion-list-header>
+            <ion-label>Mata Cachorro</ion-label>
+          </ion-list-header>
+
+          <ion-item>
+            <ion-label>Sim</ion-label>
+            <ion-radio slot="start" value="Sim" type='text' [checked]="selected"></ion-radio>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Não</ion-label>
+            <ion-radio slot="start" value="Não" type='text' [checked]="selected"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+      </ion-list>
+      <!--div padding>
+        <ion-slides  pager="true" style="height: 50%;">
+            <ion-slide>
+              <div class="cover-overlay overlay bg-black opacity-70"></div>
+              <img width="700" class="owl-lazy" src="../assets/icon/veiculo.png" data-src="../assets/icon/veiculo.png"/-->
+        <ion-item>
+        <ion-label>Tanque</ion-label>
+        <ion-select formControlName="tanque"  matInput [(ngModel)]="cadastrarMotocicleta.tanque">
+          <ion-select-option value="1">Avariado</ion-select-option>
+          <ion-select-option value="2">Risco</ion-select-option>
+          <ion-select-option value="3">Falta</ion-select-option>
+          <ion-select-option value="4">Quebrado</ion-select-option>
+          <ion-select-option value="5">Trincado</ion-select-option>
+          <ion-select-option value="6">Amassado</ion-select-option>
+          <ion-select-option value="7">Impossível Vistoriar</ion-select-option>
+        </ion-select>
+        </ion-item>
+        <ion-item>
+        <ion-label>Proteção Frontal</ion-label>
+        <ion-select formControlName="protecao_frontal"  matInput [(ngModel)]="cadastrarMotocicleta.protecao_frontal">
+          <ion-select-option value="1">Avariado</ion-select-option>
+          <ion-select-option value="2">Risco</ion-select-option>
+          <ion-select-option value="3">Falta</ion-select-option>
+          <ion-select-option value="4">Quebrado</ion-select-option>
+          <ion-select-option value="5">Trincado</ion-select-option>
+          <ion-select-option value="6">Amassado</ion-select-option>
+          <ion-select-option value="7">Impossível Vistoriar</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label>Retrovisor Direito</ion-label>
+        <ion-select formControlName="retrovisor_dir"  matInput [(ngModel)]="cadastrarMotocicleta.retrovisor_dir">
+          <ion-select-option value="1">Avariado</ion-select-option>
+          <ion-select-option value="2">Risco</ion-select-option>
+          <ion-select-option value="3">Falta</ion-select-option>
+          <ion-select-option value="4">Quebrado</ion-select-option>
+          <ion-select-option value="5">Trincado</ion-select-option>
+          <ion-select-option value="6">Amassado</ion-select-option>
+          <ion-select-option value="7">Impossível Vistoriar</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label>Retrovisor Esquerdo</ion-label>
+        <ion-select formControlName="retrovisor_esq"  matInput [(ngModel)]="cadastrarMotocicleta.retrovisor_esq">
+          <ion-select-option value="1">Avariado</ion-select-option>
+          <ion-select-option value="2">Risco</ion-select-option>
+          <ion-select-option value="3">Falta</ion-select-option>
+          <ion-select-option value="4">Quebrado</ion-select-option>
+          <ion-select-option value="5">Trincado</ion-select-option>
+          <ion-select-option value="6">Amassado</ion-select-option>
+          <ion-select-option value="7">Impossível Vistoriar</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label>Farol</ion-label>
+        <ion-select formControlName="farol"  matInput [(ngModel)]="cadastrarMotocicleta.farol">
+          <ion-select-option value="1">Avariado</ion-select-option>
+          <ion-select-option value="2">Risco</ion-select-option>
+          <ion-select-option value="3">Falta</ion-select-option>
+          <ion-select-option value="4">Quebrado</ion-select-option>
+          <ion-select-option value="5">Trincado</ion-select-option>
+          <ion-select-option value="6">Amassado</ion-select-option>
+          <ion-select-option value="7">Impossível Vistoriar</ion-select-option>
+        </ion-select>
+      </ion-item>
+     
+    
+      <ion-item>
+        <ion-label>Motor</ion-label>
+        <ion-select formControlName="motor"  matInput [(ngModel)]="cadastrarMotocicleta.motor">
+          <ion-select-option value="1">Avariado</ion-select-option>
+          <ion-select-option value="2">Risco</ion-select-option>
+          <ion-select-option value="3">Falta</ion-select-option>
+          <ion-select-option value="4">Quebrado</ion-select-option>
+          <ion-select-option value="5">Trincado</ion-select-option>
+          <ion-select-option value="6">Amassado</ion-select-option>
+          <ion-select-option value="7">Impossível Vistoriar</ion-select-option>
+        </ion-select>
+      </ion-item>
+     
+      <ion-item>
+        <ion-label>Pneu Dianteiro</ion-label>
+        <ion-select  formControlName="pneu_dianteiro"  matInput [(ngModel)]="cadastrarMotocicleta.pneu_dianteiro">
+          <ion-select-option value="1">Avariado</ion-select-option>
+          <ion-select-option value="2">Risco</ion-select-option>
+          <ion-select-option value="3">Falta</ion-select-option>
+          <ion-select-option value="4">Quebrado</ion-select-option>
+          <ion-select-option value="5">Trincado</ion-select-option>
+          <ion-select-option value="6">Amassado</ion-select-option>
+          <ion-select-option value="7">Impossível Vistoriar</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label>Pneu Traseiro</ion-label>
+        <ion-select formControlName="pneu_traseiro"  matInput [(ngModel)]="cadastrarMotocicleta.pneu_traseiro">
+          <ion-select-option value="1">Avariado</ion-select-option>
+          <ion-select-option value="2">Risco</ion-select-option>
+          <ion-select-option value="3">Falta</ion-select-option>
+          <ion-select-option value="4">Quebrado</ion-select-option>
+          <ion-select-option value="5">Trincado</ion-select-option>
+          <ion-select-option value="6">Amassado</ion-select-option>
+          <ion-select-option value="7">Impossível Vistoriar</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label>Seta Esquerda</ion-label>
+        <ion-select formControlName="seta_esq"  matInput [(ngModel)]="cadastrarMotocicleta.seta_esq">
+          <ion-select-option value="1">Avariado</ion-select-option>
+          <ion-select-option value="2">Risco</ion-select-option>
+          <ion-select-option value="3">Falta</ion-select-option>
+          <ion-select-option value="4">Quebrado</ion-select-option>
+          <ion-select-option value="5">Trincado</ion-select-option>
+          <ion-select-option value="6">Amassado</ion-select-option>
+          <ion-select-option value="7">Impossível Vistoriar</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label>Seta Direita</ion-label>
+        <ion-select formControlName="seta_dir"  matInput [(ngModel)]="cadastrarMotocicleta.seta_dir">
+          <ion-select-option value="1">Avariado</ion-select-option>
+          <ion-select-option value="2">Risco</ion-select-option>
+          <ion-select-option value="3">Falta</ion-select-option>
+          <ion-select-option value="4">Quebrado</ion-select-option>
+          <ion-select-option value="5">Trincado</ion-select-option>
+          <ion-select-option value="6">Amassado</ion-select-option>
+          <ion-select-option value="7">Impossível Vistoriar</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label>Banco</ion-label>
+        <ion-select formControlName="banco"  matInput [(ngModel)]="cadastrarMotocicleta.banco">
+          <ion-select-option value="1">Avariado</ion-select-option>
+          <ion-select-option value="2">Risco</ion-select-option>
+          <ion-select-option value="3">Falta</ion-select-option>
+          <ion-select-option value="4">Quebrado</ion-select-option>
+          <ion-select-option value="5">Trincado</ion-select-option>
+          <ion-select-option value="6">Amassado</ion-select-option>
+          <ion-select-option value="7">Impossível Vistoriar</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label>Farolete</ion-label>
+        <ion-select formControlName="farolete"  matInput [(ngModel)]="cadastrarMotocicleta.farolete">
+          <ion-select-option value="1">Avariado</ion-select-option>
+          <ion-select-option value="2">Risco</ion-select-option>
+          <ion-select-option value="3">Falta</ion-select-option>
+          <ion-select-option value="4">Quebrado</ion-select-option>
+          <ion-select-option value="5">Trincado</ion-select-option>
+          <ion-select-option value="6">Amassado</ion-select-option>
+          <ion-select-option value="7">Impossível Vistoriar</ion-select-option>
+        </ion-select>
+      </ion-item>
+     
+      <ion-item>
+        <ion-label>Bengala</ion-label>
+        <ion-select formControlName="bengala"  matInput [(ngModel)]="cadastrarMotocicleta.bengala">
+          <ion-select-option value="1">Avariado</ion-select-option>
+          <ion-select-option value="2">Risco</ion-select-option>
+          <ion-select-option value="3">Falta</ion-select-option>
+          <ion-select-option value="4">Quebrado</ion-select-option>
+          <ion-select-option value="5">Trincado</ion-select-option>
+          <ion-select-option value="6">Amassado</ion-select-option>
+          <ion-select-option value="7">Impossível Vistoriar</ion-select-option>
+        </ion-select>
+      </ion-item> 
+      <ion-item>
+        <ion-label>Freio</ion-label>
+        <ion-select formControlName="freio"  matInput [(ngModel)]="cadastrarMotocicleta.freio">
+          <ion-select-option value="1">Avariado</ion-select-option>
+          <ion-select-option value="2">Risco</ion-select-option>
+          <ion-select-option value="3">Falta</ion-select-option>
+          <ion-select-option value="4">Quebrado</ion-select-option>
+          <ion-select-option value="5">Trincado</ion-select-option>
+          <ion-select-option value="6">Amassado</ion-select-option>
+          <ion-select-option value="7">Impossível Vistoriar</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label>Carenagem Direita</ion-label>
+        <ion-select formControlName="carenagem_dir"  matInput [(ngModel)]="cadastrarMotocicleta.carenagem_dir">
+          <ion-select-option value="1">Avariado</ion-select-option>
+          <ion-select-option value="2">Risco</ion-select-option>
+          <ion-select-option value="3">Falta</ion-select-option>
+          <ion-select-option value="4">Quebrado</ion-select-option>
+          <ion-select-option value="5">Trincado</ion-select-option>
+          <ion-select-option value="6">Amassado</ion-select-option>
+          <ion-select-option value="7">Impossível Vistoriar</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label>Carenagem Esquerda</ion-label>
+        <ion-select formControlName="carenagem_esq"  matInput [(ngModel)]="cadastrarMotocicleta.carenagem_esq">
+          <ion-select-option value="1">Avariado</ion-select-option>
+          <ion-select-option value="2">Risco</ion-select-option>
+          <ion-select-option value="3">Falta</ion-select-option>
+          <ion-select-option value="4">Quebrado</ion-select-option>
+          <ion-select-option value="5">Trincado</ion-select-option>
+          <ion-select-option value="6">Amassado</ion-select-option>
+          <ion-select-option value="7">Impossível Vistoriar</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label>Suporte Placa</ion-label>
+        <ion-select formControlName="suporte_placa"  matInput [(ngModel)]="cadastrarMotocicleta.suporte_placa">
+          <ion-select-option value="1">Avariado</ion-select-option>
+          <ion-select-option value="2">Risco</ion-select-option>
+          <ion-select-option value="3">Falta</ion-select-option>
+          <ion-select-option value="4">Quebrado</ion-select-option>
+          <ion-select-option value="5">Trincado</ion-select-option>
+          <ion-select-option value="6">Amassado</ion-select-option>
+          <ion-select-option value="7">Impossível Vistoriar</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label>Escapamento</ion-label>
+        <ion-select formControlName="escapamento"  matInput [(ngModel)]="cadastrarMotocicleta.escapamento">
+          <ion-select-option value="1">Avariado</ion-select-option>
+          <ion-select-option value="2">Risco</ion-select-option>
+          <ion-select-option value="3">Falta</ion-select-option>
+          <ion-select-option value="4">Quebrado</ion-select-option>
+          <ion-select-option value="5">Trincado</ion-select-option>
+          <ion-select-option value="6">Amassado</ion-select-option>
+          <ion-select-option value="7">Impossível Vistoriar</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label>Roda Dianteira</ion-label>
+        <ion-select formControlName="roda_dianteira"  matInput [(ngModel)]="cadastrarMotocicleta.roda_dianteira">
+          <ion-select-option value="1">Avariado</ion-select-option>
+          <ion-select-option value="2">Risco</ion-select-option>
+          <ion-select-option value="3">Falta</ion-select-option>
+          <ion-select-option value="4">Quebrado</ion-select-option>
+          <ion-select-option value="5">Trincado</ion-select-option>
+          <ion-select-option value="6">Amassado</ion-select-option>
+          <ion-select-option value="7">Impossível Vistoriar</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label>Roda Trasiera</ion-label>
+        <ion-select formControlName="roda_traseira"  matInput [(ngModel)]="cadastrarMotocicleta.roda_traseira">
+          <ion-select-option value="1">Avariado</ion-select-option>
+          <ion-select-option value="2">Risco</ion-select-option>
+          <ion-select-option value="3">Falta</ion-select-option>
+          <ion-select-option value="4">Quebrado</ion-select-option>
+          <ion-select-option value="5">Trincado</ion-select-option>
+          <ion-select-option value="6">Amassado</ion-select-option>
+          <ion-select-option value="7">Impossível Vistoriar</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item  *ngIf="this.cadastrarMotocicleta.foto_5 == null"> 
+        <ion-slide  horizontal="center" align="center" :style="width: 70px; height: 70px; align: center;" [fullscreen]="true" [options]="slideOpts">
+          <img [src]="photo" *ngIf="photo">
+        <ion-fab vertical="bottom" align="center" horizontal="center" slot="fixed">
+          <ion-fab-button  (click)="takePicture()">
+            <ion-icon  name="camera"></ion-icon>
+          </ion-fab-button>
+        </ion-fab>
+      </ion-slide>
+       </ion-item>
+      <ion-button  class="botaoNovo"  type="submit"  >Cadastrar</ion-button>   <ion-button  class="botaoNovo"  routerLink='/camera' >Fotografar</ion-button>
+    </ion-card-content>
+  </ion-card>
+</form>
+</ion-content>
+

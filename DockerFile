@@ -1,0 +1,42 @@
+#FROM Kaival278/docker-ionic-android-sdk:latest as android
+#RUN git clone https://gitlab.com/eudis3m/checklist-web.git
+#WORKDIR /ionicapp/checklist_app
+#RUN npm install
+#RUN ionic cordova plataform add android || true
+#RUN rm -rf node_modules
+#RUN npm install
+#WORKDIR /ionicapp/checklist_app/platforms/android/app/
+#RUN wget http://128.199.70.42/google-services.json
+#WORKDIR /ionicapp/checklist_app
+#RUN  ionic cordova build android
+#WORKDIR /ionicapp/checklist_app/platforms/android/app/build/outputs/apk/debug/
+#ADD CI_email_list.txt CI_email_list.txt
+#ADD upload_and_sendApp.sh upload_and_sendApp.sh
+#RUN chmod +x upload_and_sendApp.sh
+#RUN ./upload_and_sendApp.sh
+#RUN exit
+
+FROM node:14.20
+
+COPY . /www/app
+
+RUN npm install -g cordova ionic
+#RUN npm install -g bower
+#RUN npm install -g gulp
+
+WORKDIR /www/app
+RUN npm install
+RUN npm install -g @angular/cli
+RUN npm install -g ionic
+CMD npm i angular5-signaturepad
+CMD nvm install  14.20
+#CMD ionic capacitor run browser --host=172.17.0.2
+EXPOSE 4200
+
+#ENTRYPOINT ["ionic"]
+#ENTRYPOINT ["ng", "serve"]
+#CMD ng run app:build
+CMD ng run  app:serve 
+#--host=172.17.0.2
+#CMD ng serve
+

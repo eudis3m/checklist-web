@@ -1,0 +1,50 @@
+.principal{
+  margin-top: 40%;
+}
+
+h2{
+  color: white;
+}
+
+ion-content{
+  --background:linear-gradient(to top, rgb(245, 240rgba(251, 247, 247, 0.7)0,0.700), rgba(247, 245, 245, 0.75), rgba(244, 243, 243, 0.8));
+}
+
+ion-item{
+  ion-label{
+    color: white;
+  }
+}
+
+ion-item{
+  ion-input{
+    color: white;
+  }
+}
+
+ion-item{
+  --background:transparent;
+  width: 95%;
+  margin: auto;
+  --highlight-color-focused:none;
+  border: 1px solid white;
+  border-radius: 8px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.btn-cadastrar{
+  width: 95%;
+  padding: 20px;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  opacity: 0.5;
+}
+
+p{
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+}
