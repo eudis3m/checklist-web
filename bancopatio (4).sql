@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 -- Estrutura da tabela `checklist_automovel`
 --
 
-DROP TABLE IF EXISTS `checklist_automovel`;
+
 CREATE TABLE IF NOT EXISTS `checklist_automovel` (
   `OID` int(11) NOT NULL AUTO_INCREMENT,
   `capo` int(5) DEFAULT NULL,
@@ -61,7 +61,7 @@ CREATE TABLE IF NOT EXISTS `checklist_automovel` (
   `proprietario` varchar(30) DEFAULT NULL,
   `veiculo` varchar(30) DEFAULT NULL,
   `chassi` varchar(30) DEFAULT NULL,
-  `local` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `local` varchar(200) CHARACTER SET utf8mb4  DEFAULT NULL,
   `atravesDE` varchar(30) DEFAULT NULL,
   `telefone` varchar(30) DEFAULT NULL,
   `entrada` varchar(10) NOT NULL,
@@ -73,7 +73,7 @@ CREATE TABLE IF NOT EXISTS `checklist_automovel` (
   `produto` varchar(30) DEFAULT NULL,
   `cidade` varchar(30) DEFAULT NULL,
   `placa` varchar(10) NOT NULL,
-  `uf` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `uf` varchar(30) CHARACTER SET utf8mb4  DEFAULT NULL,
   `documento` varchar(5) DEFAULT NULL,
   `bagagito` varchar(5) DEFAULT NULL,
   `retrovisor_eletrico` varchar(5) DEFAULT NULL,
@@ -81,7 +81,7 @@ CREATE TABLE IF NOT EXISTS `checklist_automovel` (
   `borrachao_lateral` varchar(5) DEFAULT NULL,
   `break_light` varchar(5) DEFAULT NULL,
   `farois_auxiliares` varchar(5) DEFAULT NULL,
-  `rodas_comum` varchar(5) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `rodas_comum` varchar(5) CHARACTER SET utf8mb4  DEFAULT NULL,
   `rodas_de_liga` varchar(5) DEFAULT NULL,
   `radio_toca_cds` varchar(5) DEFAULT NULL,
   `amplificador` varchar(5) DEFAULT NULL,
@@ -112,7 +112,7 @@ CREATE TABLE IF NOT EXISTS `checklist_automovel` (
   `bau_esq` int(11) DEFAULT NULL,
   `caminhao` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`OID`)
-) ENGINE=MyISAM AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 ;
 
 --
 -- Extraindo dados da tabela `checklist_automovel`
@@ -129,7 +129,7 @@ INSERT INTO `checklist_automovel` (`OID`, `capo`, `parabrisa`, `retrovisor_dir`,
 -- Estrutura da tabela `checklist_motocicleta`
 --
 
-DROP TABLE IF EXISTS `checklist_motocicleta`;
+
 CREATE TABLE IF NOT EXISTS `checklist_motocicleta` (
   `OID` int(11) NOT NULL AUTO_INCREMENT,
   `tanque` int(5) DEFAULT NULL,
@@ -157,7 +157,7 @@ CREATE TABLE IF NOT EXISTS `checklist_motocicleta` (
   `proprietario` varchar(30) DEFAULT NULL,
   `veiculo` varchar(30) DEFAULT NULL,
   `chassi` varchar(30) DEFAULT NULL,
-  `local` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `local` varchar(30) CHARACTER SET utf8mb4  DEFAULT NULL,
   `atravesDE` varchar(30) DEFAULT NULL,
   `telefone` varchar(30) DEFAULT NULL,
   `entrada` varchar(10) NOT NULL,
@@ -169,13 +169,13 @@ CREATE TABLE IF NOT EXISTS `checklist_motocicleta` (
   `produto` varchar(30) DEFAULT NULL,
   `cidade` varchar(30) DEFAULT NULL,
   `placa` varchar(10) NOT NULL,
-  `uf` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `uf` varchar(30) CHARACTER SET utf8mb4  DEFAULT NULL,
   `documento` varchar(5) DEFAULT NULL,
   `bagagito` varchar(5) DEFAULT NULL,
   `retrovisor_eletrico` varchar(5) DEFAULT NULL,
   `retrovisor_comum` varchar(5) DEFAULT NULL,
   `farois_auxiliares` varchar(5) DEFAULT NULL,
-  `rodas_comum` varchar(5) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `rodas_comum` varchar(5) CHARACTER SET utf8mb4  DEFAULT NULL,
   `rodas_de_liga` varchar(5) DEFAULT NULL,
   `radio_toca_cds` varchar(5) DEFAULT NULL,
   `amplificador` varchar(5) DEFAULT NULL,
@@ -191,7 +191,7 @@ CREATE TABLE IF NOT EXISTS `checklist_motocicleta` (
   `foto_5` longblob,
   `motocicleta` varchar(10) NOT NULL,
   PRIMARY KEY (`OID`)
-) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 ;
 
 --
 -- Extraindo dados da tabela `checklist_motocicleta`
@@ -206,14 +206,13 @@ INSERT INTO `checklist_motocicleta` (`OID`, `tanque`, `protecao_frontal`, `retro
 -- Estrutura da tabela `databasechangeloglock`
 --
 
-DROP TABLE IF EXISTS `databasechangeloglock`;
 CREATE TABLE IF NOT EXISTS `databasechangeloglock` (
   `ID` int(11) NOT NULL,
   `LOCKED` bit(1) NOT NULL,
   `LOCKGRANTED` datetime DEFAULT NULL,
   `LOCKEDBY` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 ;
 
 --
 -- Extraindo dados da tabela `databasechangeloglock`
@@ -228,13 +227,13 @@ INSERT INTO `databasechangeloglock` (`ID`, `LOCKED`, `LOCKGRANTED`, `LOCKEDBY`) 
 -- Estrutura da tabela `listaveiculos`
 --
 
-DROP TABLE IF EXISTS `listaveiculos`;
+
 CREATE TABLE IF NOT EXISTS `listaveiculos` (
   `solicitante` varchar(30) DEFAULT NULL,
   `proprietario` varchar(30) DEFAULT NULL,
   `veiculo` varchar(30) DEFAULT NULL,
   `chassi` varchar(30) DEFAULT NULL,
-  `local` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `local` varchar(30) CHARACTER SET utf8mb4  DEFAULT NULL,
   `atravesDE` varchar(30) DEFAULT NULL,
   `telefone` varchar(30) DEFAULT NULL,
   `ano` varchar(30) DEFAULT NULL,
@@ -248,7 +247,7 @@ CREATE TABLE IF NOT EXISTS `listaveiculos` (
   `placa` varchar(10) NOT NULL,
   `uf` varchar(30) DEFAULT NULL,
   `checkList` longblob
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 ;
 
 --
 -- Extraindo dados da tabela `listaveiculos`
@@ -263,16 +262,16 @@ INSERT INTO `listaveiculos` (`solicitante`, `proprietario`, `veiculo`, `chassi`,
 -- Estrutura da tabela `retiraveiculo`
 --
 
-DROP TABLE IF EXISTS `retiraveiculo`;
+
 CREATE TABLE IF NOT EXISTS `retiraveiculo` (
   `OID` int(11) NOT NULL AUTO_INCREMENT,
   `saida` varchar(10) DEFAULT NULL,
-  `nome` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `rg` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `ssp` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `cnh` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `nome` varchar(30) CHARACTER SET utf8mb4  DEFAULT NULL,
+  `rg` varchar(30) CHARACTER SET utf8mb4  DEFAULT NULL,
+  `ssp` varchar(30) CHARACTER SET utf8mb4  DEFAULT NULL,
+  `cnh` varchar(30) CHARACTER SET utf8mb4  DEFAULT NULL,
   `categoria` varchar(30) DEFAULT NULL,
-  `placa` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `placa` varchar(30) CHARACTER SET utf8mb4  DEFAULT NULL,
   `total` double DEFAULT NULL,
   `diaria` varchar(30) DEFAULT NULL,
   `assinatura` blob,
@@ -282,11 +281,11 @@ CREATE TABLE IF NOT EXISTS `retiraveiculo` (
   `DT_ALTERACAO` datetime NOT NULL,
   `OID_USUARIO_CADASTRO` int(11) NOT NULL,
   `OID_USUARIO_ALTERACAO` int(11) NOT NULL,
-  `ID_ATIVO` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `ID_ATIVO` varchar(10) CHARACTER SET utf8mb4  DEFAULT NULL,
   `oid_checklist` int(11) DEFAULT NULL,
   PRIMARY KEY (`OID`),
   KEY `fk_entrada` (`oid_checklist`)
-) ENGINE=MyISAM AUTO_INCREMENT=40 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=40 DEFAULT CHARSET=utf8mb4 ;
 
 --
 -- Extraindo dados da tabela `retiraveiculo`
@@ -301,7 +300,7 @@ INSERT INTO `retiraveiculo` (`OID`, `saida`, `nome`, `rg`, `ssp`, `cnh`, `catego
 -- Estrutura da tabela `usuario`
 --
 
-DROP TABLE IF EXISTS `usuario`;
+
 CREATE TABLE IF NOT EXISTS `usuario` (
   `oid` varchar(5) NOT NULL,
   `ds_senha` varchar(100) NOT NULL,
@@ -316,7 +315,7 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   `OID_USUARIO_ALTERACAO` bigint(20) NOT NULL DEFAULT '0',
   `ID_ATIVO` char(1) NOT NULL DEFAULT 'S',
   PRIMARY KEY (`oid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 ;
 
 --
 -- Extraindo dados da tabela `usuario`
@@ -333,7 +332,7 @@ INSERT INTO `usuario` (`oid`, `ds_senha`, `ds_login`, `nm_usuario`, `nm_recursos
 
 DROP TABLE IF EXISTS `vistoria`;
 CREATE TABLE IF NOT EXISTS `vistoria` (
-  `documento` varchar(5) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `documento` varchar(5) CHARACTER SET utf8mb4  DEFAULT NULL,
   `bagagito` varchar(5) DEFAULT NULL,
   `retrovisor_eletrico` varchar(5) DEFAULT NULL,
   `retrovisor_comum` varchar(5) DEFAULT NULL,
@@ -357,8 +356,8 @@ CREATE TABLE IF NOT EXISTS `vistoria` (
   `chave_de_roda` varchar(5) DEFAULT NULL,
   `calotas` varchar(5) DEFAULT NULL,
   `alarme` varchar(5) DEFAULT NULL,
-  `placa3` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `placa3` varchar(30) CHARACTER SET utf8mb4  DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 ;
 
 --
 -- Extraindo dados da tabela `vistoria`

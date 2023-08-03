@@ -34,6 +34,7 @@ import {CommonModule, CurrencyPipe, } from '@angular/common';
 import {HomeComponent} from './pages/home/home.page';
 import {AppServices} from '../app/auth/AppServices';
 import {HomePage } from './providers/utils/conexao';
+import {AssinaturaPageModule} from "./pages/assinatura/assinatura.module"
 //import {Tab2Page} from './pages/tab2/tab2.page';
 //import {Tab3Page} from './pages/tab3/tab3.page';
 import {UsuarioComponent} from './pages/usuario/usuario.page';
@@ -89,6 +90,8 @@ import { BrMaskerModule } from 'br-mask';
     JsonpModule,
     //HttpHeaders ,
     AppServices,
+    SignaturePad,
+    AssinaturaPageModule,
     HomePage,
      LoginWS,
     {provide: AuthService},

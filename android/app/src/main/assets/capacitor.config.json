@@ -1,6 +1,6 @@
 {
-  "appId": "io.ionic.starter",
-  "appName": "Checklist",
+  "appId": "io.checklist.starter",
+  "appName": "android",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "www",
@@ -21,7 +21,11 @@
       "FadeSplashScreen": "true",
       "AutoHideSplashScreen": "false",
       "ShowSplashScreen": "true",
-      "ShowSplashScreenSpinner": "false"
+      "ShowSplashScreenSpinner": "false",
+      "android-targetSdkVersion": "32"
     }
+  },
+  "server": {
+    "url": "http://192.168.100.187:8100"
   }
 }

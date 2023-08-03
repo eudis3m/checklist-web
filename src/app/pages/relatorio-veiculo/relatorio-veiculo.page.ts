@@ -14,6 +14,7 @@ import {jsPDF} from 'jspdf';
 import {} from 'jszip';
 import { fileURLToPath } from 'url';
 import { Filesystem } from '@capacitor/core';
+import {Assinatura} from '../../model/assinatura';
 
 
 
@@ -29,7 +30,8 @@ export class RelatorioVeiculoPage implements OnInit {
   editar: boolean;
   cadastrarveiculoEntity?: RelatorioVeiculo[] ;
   @ViewChild(RouterOutlet) outlet: RouterOutlet;
-  constructor( private spinner: NgxSpinnerService, private snotifyService: SnotifyService,
+  public PageAssinatura: Assinatura;
+  constructor(private spinner: NgxSpinnerService, private snotifyService: SnotifyService,
   private relatorioveiculoWS: RelatorioVeiculoWS, private activatedRoute: ActivatedRoute,private formBuilder: FormBuilder,
   private globalVars: GlobalVars, private router: Router) {
     // super();
@@ -161,9 +163,13 @@ export class RelatorioVeiculoPage implements OnInit {
       cnh: [this.relatorioVeiculo.cnh, [Validators.required]],
       categoria: [this.relatorioVeiculo.categoria, [Validators.required]],
       email: [this.relatorioVeiculo.email, [Validators.required]],
-      assinatura: [this.relatorioVeiculo.assinatura, [Validators.required]],
+      assinatura: [this.activatedRoute.snapshot.paramMap.get('assinatura_vistoriador'), [Validators.required]],
 
     });
+  }
+
+  public assinatura(){
+    this.router.navigate(['/assinatura', {'page': 3}]);
   }
   public destroy(){
     this.router.navigate(['/login']);

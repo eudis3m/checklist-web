@@ -18,3 +18,12 @@ sudo docker run -d  -p 21:21  -e USERS="eudis3m|189Sud36@"  1b61d84558b8
 s3browser
 
 gradlew bundleRelease
+
+ionic capacitor run android -l --external
+
+
+cordova build android --release -- --packageType=bundle
+
+keytool -genkey -v -keystore minha-chave.keystore -alias alias_name -keyalg RSA -keysize 2048 -validity 10000
+
+jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore minha-chave.keystore C:\Users\eudis.junior\Desktop\pessoal_git\checklist-web\platforms\android\app\build\outputs\bundle\release\app-release.aab alias_name

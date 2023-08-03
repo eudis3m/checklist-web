@@ -12,6 +12,15 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import {from, Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import { UpdateMotocicletaWS} from '../../providers/ws/update-motocicletaWS';
+import { RelatorioVeiculoWS} from '../../providers/ws/relatorio-veiculoWS';
+import {Assinatura} from '../../model/assinatura';
+import { AssinaturaPage } from '../assinatura/assinatura.page';
+import {
+  CameraPreview,
+  CameraPreviewOptions,
+  CameraPreviewPictureOptions
+} from '@ionic-native/camera-preview';
+
 
 
 const { Camera } = Plugins;
@@ -26,9 +35,12 @@ export class CadastrarMotocicletaPage implements OnInit {
   editar: boolean;
   @ViewChild(RouterOutlet) outlet: RouterOutlet;
   photo: SafeResourceUrl;
+  page = 2;
   listaMotocicleta ?: CadastrarMotocicleta[];
-  constructor( private spinner: NgxSpinnerService, private snotifyService: SnotifyService,
-  private cadastrarveiculoWS: CadastrarMotocicletaWS, private activatedRoute: ActivatedRoute,private formBuilder: FormBuilder,
+  //testassinatura: AssinaturaPage;
+  private PageAssinatura: Assinatura;
+  constructor(private relatorioveiculoWS: RelatorioVeiculoWS,private spinner: NgxSpinnerService, private snotifyService: SnotifyService,
+  private cadastrarMotocicletaWS: CadastrarMotocicletaWS, private activatedRoute: ActivatedRoute,private formBuilder: FormBuilder,
   private globalVars: GlobalVars, private router: Router,  public updateMotocicletaWS :UpdateMotocicletaWS) {
     // super();
    }
@@ -42,7 +54,7 @@ export class CadastrarMotocicletaPage implements OnInit {
         this.editar = false;
       } else {
         this.editar = true;
-        this.cadastrarveiculoWS.findById(routeParams.id).subscribe(result => {
+        this.cadastrarMotocicletaWS.findById(routeParams.id).subscribe(result => {
           this.cadastrarMotocicleta = result;
           console.log(result);
         });
@@ -88,11 +100,17 @@ export class CadastrarMotocicletaPage implements OnInit {
       bateria: [this.cadastrarMotocicleta.bateria,  [Validators.required]],
       alarme: [this.cadastrarMotocicleta.alarme,  [Validators.required]],
       motocicleta: [this.cadastrarMotocicleta.motocicleta = 'Sim',  [Validators.required]],
+      combustivel: [this.cadastrarMotocicleta.combustivel,  [Validators.required]],
+      pneus_status: [this.cadastrarMotocicleta.pneus_status,  [Validators.required]],
+      descricao:[this.cadastrarMotocicleta.descricao,  [Validators.required]],
       foto: [this.cadastrarMotocicleta.foto,  [Validators.required]],
       foto_2: [this.cadastrarMotocicleta.foto_2,  [Validators.required]],
       foto_3: [this.cadastrarMotocicleta.foto_3,  [Validators.required]],
       foto_4: [this.cadastrarMotocicleta.foto_4,  [Validators.required]],
       foto_5: [this.cadastrarMotocicleta.foto_5,  [Validators.required]],
+      foto_6: [this.cadastrarMotocicleta.foto_6,  [Validators.required]],
+      foto_7: [this.cadastrarMotocicleta.foto_7,  [Validators.required]],
+      foto_8: [this.cadastrarMotocicleta.foto_8,  [Validators.required]],
       empresa: [this.cadastrarMotocicleta.empresa = usuarioLogado.login,  [Validators.required]],
       tanque: [this.cadastrarMotocicleta.tanque,  [Validators.required]],
       freio: [this.cadastrarMotocicleta.freio,  [Validators.required]],
@@ -112,14 +130,20 @@ export class CadastrarMotocicletaPage implements OnInit {
       banco: [this.cadastrarMotocicleta.banco,  [Validators.required]],
       bengala: [this.cadastrarMotocicleta.bengala,  [Validators.required]],
       buzinas: [this.cadastrarMotocicleta.buzinas,  [Validators.required]],
+      email: [this.cadastrarMotocicleta.email,  [Validators.required]],
+      assinatura_policial:  [this.cadastrarMotocicleta.assinatura_policial,  [Validators.required]],
+      assinatura_vistoriador: [this.activatedRoute.snapshot.paramMap.get('assinatura_vistoriador'),[Validators.required]]
     });
   }
-
+  public assinatura():void{
+    //this.testassinatura.page === 2;
+    this.router.navigate(['/assinatura',{'page': 2}]);
+  }
   public placaMotocicleta(){
     return  this.updateMotocicletaWS.findPlacaMotocicleta(this.cadastrarMotocicleta.placa).pipe(
       map( resultMotocicleta =>{
         if(resultMotocicleta != null){
-          //this.listaMotocicleta = resultMotocicleta;
+          this.listaMotocicleta = resultMotocicleta;
           return {'cadastroErro' : true};
       }
         return true;
@@ -128,7 +152,7 @@ export class CadastrarMotocicletaPage implements OnInit {
   }
   
   public destroy(){
-    this.router.navigate(['/login']);
+    this.router.navigate(['/home']);
   }
   private inicializarObjeto() {
     this.cadastrarMotocicleta = <CadastrarMotocicleta>{};
@@ -143,7 +167,7 @@ export class CadastrarMotocicletaPage implements OnInit {
 
      this.spinner.show();
      console.log(this.cadastrarMotocicleta);
-     this.cadastrarveiculoWS.save(this.cadastrarMotocicleta).subscribe(result => {
+     this.cadastrarMotocicletaWS.save(this.cadastrarMotocicleta).subscribe(result => {
        if (!this.editar) {
          this.Group.reset();
        }
@@ -153,7 +177,7 @@ export class CadastrarMotocicletaPage implements OnInit {
      }, error => {
        this.spinner.hide();
        this.snotifyService.error(error);
-       alert('Veículo não cadastrado com sucesso!')
+       alert('Veículo não cadastrado!')
      });
    }
    /*load() {
@@ -230,6 +254,111 @@ export class CadastrarMotocicletaPage implements OnInit {
   }));
   }
 
+  else if (this.cadastrarMotocicleta.foto_6 == null){
+    const foto_6: CameraOptions = {
+      quality: 100,
+      allowEditing: false,
+      source: CameraSource.Camera,
+      resultType: CameraResultType.Base64
+  };
+  return from(Camera.getPhoto(foto_6).then(photo => {
+      return this.cadastrarMotocicleta.foto_6 =   photo.base64String;
+  }).catch(err => {
+      console.error('Error: ', err);
+  }));
+  }
+
+  else if (this.cadastrarMotocicleta.foto_7 == null){
+    const foto_7: CameraOptions = {
+      quality: 100,
+      allowEditing: false,
+      source: CameraSource.Camera,
+      resultType: CameraResultType.Base64
+  };
+  return from(Camera.getPhoto(foto_7).then(photo => {
+      return this.cadastrarMotocicleta.foto_7 =   photo.base64String;
+  }).catch(err => {
+      console.error('Error: ', err);
+  }));
+  }
+
+  else if (this.cadastrarMotocicleta.foto_8 == null){
+    const foto_8: CameraOptions = {
+      quality: 100,
+      allowEditing: false,
+      source: CameraSource.Camera,
+      resultType: CameraResultType.Base64
+  };
+  return from(Camera.getPhoto(foto_8).then(photo => {
+      return this.cadastrarMotocicleta.foto_8 =   photo.base64String;
+  }).catch(err => {
+      console.error('Error: ', err);
+  }));
+  }
+
 }
+
+
+public GerarRelatorio() {
+  if(this.cadastrarMotocicleta != null){
+  //  let doc = new jsPDF();
+    return this.relatorioveiculoWS.findRelatorio(this.cadastrarMotocicleta.placa,this.cadastrarMotocicleta.email).subscribe(
+    result => {
+     /*try {
+      var file = new Blob([result], {type: 'arraybuffer'});
+        let tempUrl = URL.createObjectURL(file);
+         const aTag = document.createElement("a");
+         aTag.href = tempUrl;
+         aTag.download = result.replace(/^.*[\\\/]/, '');
+         document.body.appendChild(aTag);
+         aTag.click();
+         URL.revokeObjectURL(tempUrl);
+         aTag.remove();
+    
+      
+     } catch (error) {
+      alert("Failed to download file!");
+     }*/
+    fetch(result,
+        {method: 'POST',
+        mode: 'cors',
+        headers: {'Content-Type': 'application/json; charset=UTF-8'}}).then(res => res.blob()).then(file => {
+       let tempUrl = URL.createObjectURL(file);
+        const aTag = document.createElement("a");
+        aTag.href = tempUrl;
+        aTag.download = result.replace(/^.*[\\\/]/, '');
+        document.body.appendChild(aTag);
+        aTag.click();
+        URL.revokeObjectURL(tempUrl);
+        aTag.remove();
+    }).catch(() => {
+        alert("Failed to download file!");
+    });
+      // if(result != null){
+
+      /* var file = new Blob([result], {type: 'arraybuffer'});
+        const url = window.URL.createObjectURL(file);
+      
+       window.open(url);
+
+       /*var a = document.createElement('a');
+     var blob = new Blob([result], {type:'arraybuffer'});
+     a.href = URL.createObjectURL(blob);
+      a.download = "filename.pdf";
+      a.click();
+      window.URL.revokeObjectURL(a.href);*/
+      /*var anchor = document.createElement('a');
+      var blob = new Blob([result], {type:'arraybuffer'});
+      anchor.href =  URL.createObjectURL(blob);
+      anchor.download = URL.createObjectURL(blob);
+      document.body.appendChild(anchor);
+      anchor.click();*/
+     //window.open(anchor.href);
+    
+        //}
+      
+    })
+    }
+  }
  }
 

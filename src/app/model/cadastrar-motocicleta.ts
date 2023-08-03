@@ -1,5 +1,6 @@
 import { NumericValueAccessor } from "@ionic/angular";
 import { Base64 } from 'js-base64';
+import { Assinatura } from "./assinatura";
 
 export interface CadastrarMotocicleta{
     //readonly oid: number;
@@ -26,8 +27,16 @@ export interface CadastrarMotocicleta{
     foto_3;
     foto_4
     foto_5;
+    foto_6:string;
+    foto_7:string;
+    foto_8:string;
+    combustivel:string;
+    pneus_status:string;
+    descricao:string;
     empresa: string;
-
+    email: string;
+    assinatura_vistoriador: string;
+    assinatura_policial: string;
     uf: string;
     documento: string;
     bagagito: string;
@@ -66,5 +75,6 @@ export interface CadastrarMotocicleta{
     bengala: number;
 
     cadastrarMotocicletaEntity?: CadastrarMotocicleta[];
+    assinatura?: Assinatura;
 
 }

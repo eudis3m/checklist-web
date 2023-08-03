@@ -21,7 +21,7 @@ export class CameraPage {
   constructor(private sanitizer: DomSanitizer, private router: Router) {
   }
 
- /*async takePicture() {
+ async takePicture() {
     const image = await Plugins.Camera.getPhoto({
       quality: 100,
       allowEditing: false,
@@ -33,9 +33,9 @@ export class CameraPage {
    foto.src = 'data:image/png;base64,' + image.base64String;
    //this.canvas.body.appendChild(foto);
    this.router.navigate(['cadastrar-veiculo', {'cadastrarVeiculo.foto': foto.src}]);
-  }*/
+  }
   /*takePicture(): Observable<string | void> {*/
-    async takePicture() {
+    /*async takePicture() {
     const image: CameraOptions = {
         quality: 100,
         allowEditing: false,
@@ -51,7 +51,7 @@ export class CameraPage {
         console.error('Error: ', err);
     }));
   
-}
+}*/
 
 ngOnInit() {
 }

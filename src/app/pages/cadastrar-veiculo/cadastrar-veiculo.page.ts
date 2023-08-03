@@ -4,7 +4,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { SnotifyService } from 'ng-snotify';
 import { CadastrarVeiculo  } from '../../model/cadastrar-veiculo';
 import { CadastrarVeiculoWS} from '../../providers/ws/cadastrar-veiculoWS';
-import { Router, ActivatedRoute , RouterOutlet } from '@angular/router';
+import { Router, ActivatedRoute , RouterOutlet} from '@angular/router';
 import { UsuarioLogado } from '../../model/usuario-logado';
 import { GlobalVars } from '../../providers/utils/global-vars';
 import { Plugins, CameraResultType, CameraSource, CameraOptions } from '@capacitor/core';
@@ -12,6 +12,14 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import {from, Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import { UpdateVeiculoWS} from '../../providers/ws/update-veiculoWS';
+import { RelatorioVeiculoWS} from '../../providers/ws/relatorio-veiculoWS';
+import {Assinatura} from '../../model/assinatura';
+import {
+  CameraPreview,
+  CameraPreviewOptions,
+  CameraPreviewPictureOptions
+} from '@ionic-native/camera-preview';
+
 
 const { Camera } = Plugins;
 @Component({
@@ -22,14 +30,19 @@ const { Camera } = Plugins;
 export class CadastrarVeiculoPage implements OnInit {
   Group: FormGroup;
   cadastrarVeiculo:  CadastrarVeiculo;
+  cadastrarveiculoEntity?:  CadastrarVeiculo[] ;
   editar: boolean;
   @ViewChild(RouterOutlet) outlet: RouterOutlet;
   photo: SafeResourceUrl;
   canvas;
-  constructor( private spinner: NgxSpinnerService, private snotifyService: SnotifyService,
+  public PageAssinatura: Assinatura;
+  constructor(
+    private relatorioveiculoWS: RelatorioVeiculoWS,
+     private spinner: NgxSpinnerService, private snotifyService: SnotifyService,
   private cadastrarveiculoWS: CadastrarVeiculoWS, private activatedRoute: ActivatedRoute,private formBuilder: FormBuilder,
   private globalVars: GlobalVars, private router: Router,public updateVeiculoWS :UpdateVeiculoWS,) {
     // super();
+
    }
 
   ngOnInit() {
@@ -95,11 +108,17 @@ export class CadastrarVeiculoPage implements OnInit {
       chave_de_roda: [this.cadastrarVeiculo.chave_de_roda,  [Validators.required]],
       calotas: [this.cadastrarVeiculo.calotas,  [Validators.required]],
       alarme: [this.cadastrarVeiculo.alarme,  [Validators.required]],
+      combustivel: [this.cadastrarVeiculo.combustivel,  [Validators.required]],
+      pneus_status: [this.cadastrarVeiculo.pneus_status,  [Validators.required]],
+      descricao:[this.cadastrarVeiculo.descricao,  [Validators.required]],
       foto: [this.cadastrarVeiculo.foto,  [Validators.required]],
       foto_2: [this.cadastrarVeiculo.foto_2,  [Validators.required]],
       foto_3: [this.cadastrarVeiculo.foto_3,  [Validators.required]],
       foto_4: [this.cadastrarVeiculo.foto_4,  [Validators.required]],
       foto_5: [this.cadastrarVeiculo.foto_5,  [Validators.required]],
+      foto_6: [this.cadastrarVeiculo.foto_6,  [Validators.required]],
+      foto_7: [this.cadastrarVeiculo.foto_7,  [Validators.required]],
+      foto_8: [this.cadastrarVeiculo.foto_8,  [Validators.required]],
       empresa: [this.cadastrarVeiculo.empresa = usuarioLogado.login,  [Validators.required]],
       capo: [this.cadastrarVeiculo.capo,  [Validators.required]],
       parabrisa: [this.cadastrarVeiculo.parabrisa,  [Validators.required]],
@@ -133,16 +152,19 @@ export class CadastrarVeiculoPage implements OnInit {
       roda_tras_dir:  [this.cadastrarVeiculo. roda_tras_dir,  [Validators.required]],
       caminhao:  [this.cadastrarVeiculo.caminhao,  [Validators.required]],
       tanque:  [this.cadastrarVeiculo.tanque,  [Validators.required]],
+      email: [this.cadastrarVeiculo.email,  [Validators.required]],
 
 
     });
   }
 
+ 
+
   public placaVeiculo(){
     return  this.updateVeiculoWS.findPlacaVeiculo(this.cadastrarVeiculo.placa).pipe(
       map( result =>{
         if(result != null){
-          //this.listaMotocicleta = resultMotocicleta;
+          this.cadastrarveiculoEntity = result;
           return {'cadastroErro' : true};
       }
         return true;
@@ -151,7 +173,7 @@ export class CadastrarVeiculoPage implements OnInit {
   }
   
   public destroy(){
-    this.router.navigate(['/login']);
+    this.router.navigate(['/home']);
   }
   private inicializarObjeto() {
     this.cadastrarVeiculo = <CadastrarVeiculo>{};
@@ -167,9 +189,10 @@ export class CadastrarVeiculoPage implements OnInit {
      this.spinner.show();
      console.log(this.cadastrarVeiculo);
       this.cadastrarveiculoWS.save(this.cadastrarVeiculo).subscribe(result => {
-      /*this.cadastrarveiculoWS.createVeiculoFoto(this.cadastrarVeiculo,
-        this.cadastrarVeiculo.foto,this.cadastrarVeiculo.foto_2, this.cadastrarVeiculo.foto_3, this.cadastrarVeiculo.foto_4,
-        this.cadastrarVeiculo.foto_5).subscribe(result => {*/
+     /* this.cadastrarveiculoWS.createVeiculoFoto(this.cadastrarVeiculo,
+        this.cadastrarVeiculo.foto,this.cadastrarVeiculo.foto_2,this.cadastrarVeiculo.foto_3
+        ,this.cadastrarVeiculo.foto_4,this.cadastrarVeiculo.foto_5,this.cadastrarVeiculo.foto_6
+        ,this.cadastrarVeiculo.foto_7,this.cadastrarVeiculo.foto_8).subscribe(result => {*/
        if (!this.editar) {
          this.Group.reset();
        }
@@ -179,7 +202,7 @@ export class CadastrarVeiculoPage implements OnInit {
       }, error => {
         this.spinner.hide();
         this.snotifyService.error(error);
-        alert('Veículo não cadastrado com sucesso!')
+        alert('Veículo não cadastrado!')
      });
    }
    /*load() {
@@ -192,7 +215,8 @@ export class CadastrarVeiculoPage implements OnInit {
     speed: 400,
     height: '100%'
   };
-   async takePicture() {
+
+  async takePicture() {
     if(this.cadastrarVeiculo.foto == null){
     const image: CameraOptions = {
         quality: 100,
@@ -260,7 +284,112 @@ export class CadastrarVeiculoPage implements OnInit {
   }));
   }
 
+  else if (this.cadastrarVeiculo.foto_6 == null){
+    const foto_6: CameraOptions = {
+      quality: 100,
+      allowEditing: false,
+      source: CameraSource.Camera,
+      resultType: CameraResultType.Base64
+  };
+  return from(Camera.getPhoto(foto_6).then(photo => {
+      return this.cadastrarVeiculo.foto_6 =   photo.base64String;
+  }).catch(err => {
+      console.error('Error: ', err);
+  }));
+  }
+
+  else if (this.cadastrarVeiculo.foto_7 == null){
+    const foto_7: CameraOptions = {
+      quality: 100,
+      allowEditing: false,
+      source: CameraSource.Camera,
+      resultType: CameraResultType.Base64
+  };
+  return from(Camera.getPhoto(foto_7).then(photo => {
+      return this.cadastrarVeiculo.foto_7 =   photo.base64String;
+  }).catch(err => {
+      console.error('Error: ', err);
+  }));
+  }
+
+  else if (this.cadastrarVeiculo.foto_8 == null){
+    const foto_8: CameraOptions = {
+      quality: 100,
+      allowEditing: false,
+      source: CameraSource.Camera,
+      resultType: CameraResultType.Base64
+  };
+  return from(Camera.getPhoto(foto_8).then(photo => {
+      return this.cadastrarVeiculo.foto_8 =   photo.base64String;
+  }).catch(err => {
+      console.error('Error: ', err);
+  }));
+  }
+
 }
+
+
+public GerarRelatorio() {
+  if(this.cadastrarVeiculo != null){
+  //  let doc = new jsPDF();
+    return this.relatorioveiculoWS.findRelatorio(this.cadastrarVeiculo.placa,this.cadastrarVeiculo.email).subscribe(
+    result => {
+     /*try {
+      var file = new Blob([result], {type: 'arraybuffer'});
+        let tempUrl = URL.createObjectURL(file);
+         const aTag = document.createElement("a");
+         aTag.href = tempUrl;
+         aTag.download = result.replace(/^.*[\\\/]/, '');
+         document.body.appendChild(aTag);
+         aTag.click();
+         URL.revokeObjectURL(tempUrl);
+         aTag.remove();
+    
+      
+     } catch (error) {
+      alert("Failed to download file!");
+     }*/
+    fetch(result,
+        {method: 'POST',
+        mode: 'cors',
+        headers: {'Content-Type': 'application/json; charset=UTF-8'}}).then(res => res.blob()).then(file => {
+       let tempUrl = URL.createObjectURL(file);
+        const aTag = document.createElement("a");
+        aTag.href = tempUrl;
+        aTag.download = result.replace(/^.*[\\\/]/, '');
+        document.body.appendChild(aTag);
+        aTag.click();
+        URL.revokeObjectURL(tempUrl);
+        aTag.remove();
+    }).catch(() => {
+        alert("Failed to download file!");
+    });
+      // if(result != null){
+
+      /* var file = new Blob([result], {type: 'arraybuffer'});
+        const url = window.URL.createObjectURL(file);
+      
+       window.open(url);
+
+       /*var a = document.createElement('a');
+     var blob = new Blob([result], {type:'arraybuffer'});
+     a.href = URL.createObjectURL(blob);
+      a.download = "filename.pdf";
+      a.click();
+      window.URL.revokeObjectURL(a.href);*/
+      /*var anchor = document.createElement('a');
+      var blob = new Blob([result], {type:'arraybuffer'});
+      anchor.href =  URL.createObjectURL(blob);
+      anchor.download = URL.createObjectURL(blob);
+      document.body.appendChild(anchor);
+      anchor.click();*/
+     //window.open(anchor.href);
+    
+        //}
+      
+    })
+    }
+  }
 
  }
 

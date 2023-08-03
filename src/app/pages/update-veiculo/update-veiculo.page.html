@@ -1188,8 +1188,51 @@
                   <ion-select-option *ngIf="listaAutomovel.lateral_diant_esq != 0 && listaAutomovel.lateral_diant_esq != 7" value="7">Impossível Vistoriar</ion-select-option>
                 </ion-select>
               </ion-item>
+
+              <ion-item>
+                <ion-label>Combustível</ion-label>
+               <ion-select formControlName="combustivel"  matInput [(ngModel)]="listaAutomovel.combustivel">
+                 <ion-select-option *ngIf="listaAutomovel.combustivel == R" value="R">Reserva</ion-select-option>
+                 <ion-select-option *ngIf="listaAutomovel.combustivel == 1/4" value="1/4">1/4</ion-select-option>
+                 <ion-select-option *ngIf="listaAutomovel.combustivel == 1/2" value="1/2">1/2</ion-select-option>
+                 <ion-select-option *ngIf="listaAutomovel.combustivel == 3/4" value="3/4">3/4</ion-select-option>
+                 <ion-select-option *ngIf="listaAutomovel.combustivel == C" value="C">Cheio</ion-select-option>
+
+                 <ion-select-option *ngIf="listaAutomovel.combustivel != 0 && listaAutomovel.combustivel != R" value="R">Reserve</ion-select-option>
+                 <ion-select-option *ngIf="listaAutomovel.combustivel != 0 && listaAutomovel.combustivel != 1/4" value="1/4">1/4</ion-select-option>
+                 <ion-select-option *ngIf="listaAutomovel.combustivel != 0 && listaAutomovel.combustivel != 1/2" value="1/2">1/2</ion-select-option>
+                 <ion-select-option *ngIf="listaAutomovel.combustivel != 0 && listaAutomovel.combustivel != 3/4" value="3/4">3/4</ion-select-option>
+                 <ion-select-option *ngIf="listaAutomovel.combustivel != 0 && listaAutomovel.combustivel!= C" value="C">Cheio</ion-select-option>
+                 </ion-select>
+             </ion-item>
+             <ion-item>
+                <ion-label>Pneus Situação</ion-label>
+               <ion-select formControlName="pneus_status"  matInput [(ngModel)]="listaAutomovel.pneus_status">
+                 <ion-select-option *ngIf="listaAutomovel.pneus_status == N" value="N">Novo</ion-select-option>
+                 <ion-select-option *ngIf="listaAutomovel.pneus_status == B" value="B">Bom</ion-select-option>
+                 <ion-select-option *ngIf="listaAutomovel.pneus_status == R" value="R">Ruins</ion-select-option>
+
+                 <ion-select-option *ngIf="listaAutomovel.combustivel != 0 && listaAutomovel.combustivel != N" value="N">Novo</ion-select-option>
+                 <ion-select-option *ngIf="listaAutomovel.combustivel != 0 && listaAutomovel.combustivel != B" value="B">Bom</ion-select-option>
+                 <ion-select-option *ngIf="listaAutomovel.combustivel != 0 && listaAutomovel.combustivel != R" value="R">Ruins</ion-select-option>
+               </ion-select>
+             </ion-item>
+             <ion-item lines="full">
+               <ion-input  type="text" placeholder="descricao" 
+               formControlName="descricao"  matInput
+               [(ngModel)]="listaAutomovel.descricao" ></ion-input>
+             </ion-item>
+             <ion-item lines="full">
+               <ion-label position="floating">email</ion-label>
+               <ion-input type='text'  formControlName="email" matInput [(ngModel)]="listaAutomovel.email"></ion-input>
+             </ion-item>
             
             <ion-button  class="botaoNovo"  type="submit"  >Atualizar</ion-button>   <ion-button  class="botaoNovo"  (click)="onDelete()">Deletar</ion-button>
+            <ion-button  class="botaoNovo"  
+            (click)="assinatura()"
+            >Assinatura</ion-button>
+            <!--ion-item lines="full" *ngIf="cadastrarVeiculo.placa != null"-->
+              <ion-button   class="botaoNovo"  (click)="GerarRelatorio()"  >Relatorio</ion-button>      
           </ion-card-content>
           </ion-card>          
       </form>

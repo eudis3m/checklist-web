@@ -13,6 +13,8 @@ import {from, Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import { CadastrarMotocicleta  } from '../../model/cadastrar-motocicleta';
 import { CadastrarMotocicletaWS} from '../../providers/ws/cadastrar-motocicletaWS';
+import { RelatorioVeiculoWS} from '../../providers/ws/relatorio-veiculoWS';
+import {Assinatura} from '../../model/assinatura';
 
 
 
@@ -32,7 +34,7 @@ export class UpdateMotocicletaPage implements OnInit {
   updateAutoComplete : string[] =[];
   listaMotocicleta ?: CadastrarMotocicleta[];
  filteredOptions: Observable<string[]>;
-  constructor( private spinner: NgxSpinnerService, private snotifyService: SnotifyService,
+  constructor( private relatorioveiculoWS: RelatorioVeiculoWS,private spinner: NgxSpinnerService, private snotifyService: SnotifyService,
    private activatedRoute: ActivatedRoute,private formBuilder: FormBuilder, public updateMotocicletaWS :UpdateMotocicletaWS,
   private globalVars: GlobalVars, private router: Router,public cadastrarMotocicletaWS : CadastrarMotocicletaWS, 
 ) {
@@ -62,6 +64,10 @@ export class UpdateMotocicletaPage implements OnInit {
 
   this.Motocicleta();
   this.placaMotocicleta();
+
+  if(this.updateMotocicleta.assinatura_vistoriador != null){
+    this.updateMotocicleta.placa = this.activatedRoute.snapshot.params['placa']
+   }
 
   }
 
@@ -124,10 +130,18 @@ export class UpdateMotocicletaPage implements OnInit {
       banco: [this.updateMotocicleta.banco,  [Validators.required]],
       bengala: [this.updateMotocicleta.bengala,  [Validators.required]],
       buzinas: [this.updateMotocicleta.buzinas,  [Validators.required]],
+      combustivel: [this.updateMotocicleta.combustivel,  [Validators.required]],
+      pneus_status: [this.updateMotocicleta.pneus_status,  [Validators.required]],
+      descricao: [this.updateMotocicleta.descricao,  [Validators.required]],
+      assinatura_vistoriador :[this.updateMotocicleta.assinatura_vistoriador = this.activatedRoute.snapshot.paramMap.get('assinatura_vistoriador')],
+      assinatura_policial: [this.updateMotocicleta.assinatura_policial = this.activatedRoute.snapshot.paramMap.get('assinatura_policial')]
+  
+
 
     });
   }
 
+  
 
 public placaMotocicleta(){
   return  this.updateMotocicletaWS.findPlacaMotocicleta(this.updateMotocicleta.placa).pipe(
@@ -187,8 +201,11 @@ public placaMotocicleta(){
       this.updateMotocicleta.roda_dianteira = resultMotocicleta['roda_dianteira'],
       this.updateMotocicleta.banco = resultMotocicleta['banco'],
       this.updateMotocicleta.bengala = resultMotocicleta['bengala'],
-      this.updateMotocicleta.buzinas = resultMotocicleta['buzinas']
-
+      this.updateMotocicleta.buzinas = resultMotocicleta['buzinas'],
+      this.updateMotocicleta.combustivel = resultMotocicleta['combustivel'],
+      this.updateMotocicleta.pneus_status = resultMotocicleta['pneus_status'],
+      this.updateMotocicleta.descricao = resultMotocicleta['descricao']
+    
     }})
   )
 
@@ -220,6 +237,74 @@ public placaMotocicleta(){
     )
   }
 */
+
+public assinatura(){
+  this.router.navigate(['/assinatura', {'page': 2, 'placa': this.updateMotocicleta.placa}]);
+          
+ }
+
+public GerarRelatorio() {
+  if(this.updateMotocicleta != null){
+  //  let doc = new jsPDF();
+    return this.relatorioveiculoWS.findRelatorio(this.updateMotocicleta.placa,this.updateMotocicleta.email).subscribe(
+    result => {
+     /*try {
+      var file = new Blob([result], {type: 'arraybuffer'});
+        let tempUrl = URL.createObjectURL(file);
+         const aTag = document.createElement("a");
+         aTag.href = tempUrl;
+         aTag.download = result.replace(/^.*[\\\/]/, '');
+         document.body.appendChild(aTag);
+         aTag.click();
+         URL.revokeObjectURL(tempUrl);
+         aTag.remove();
+    
+      
+     } catch (error) {
+      alert("Failed to download file!");
+     }*/
+    fetch(result,
+        {method: 'POST',
+        mode: 'cors',
+        headers: {'Content-Type': 'application/json; charset=UTF-8'}}).then(res => res.blob()).then(file => {
+       let tempUrl = URL.createObjectURL(file);
+        const aTag = document.createElement("a");
+        aTag.href = tempUrl;
+        aTag.download = result.replace(/^.*[\\\/]/, '');
+        document.body.appendChild(aTag);
+        aTag.click();
+        URL.revokeObjectURL(tempUrl);
+        aTag.remove();
+    }).catch(() => {
+        alert("Failed to download file!");
+    });
+      // if(result != null){
+
+      /* var file = new Blob([result], {type: 'arraybuffer'});
+        const url = window.URL.createObjectURL(file);
+      
+       window.open(url);
+
+       /*var a = document.createElement('a');
+     var blob = new Blob([result], {type:'arraybuffer'});
+     a.href = URL.createObjectURL(blob);
+      a.download = "filename.pdf";
+      a.click();
+      window.URL.revokeObjectURL(a.href);*/
+      /*var anchor = document.createElement('a');
+      var blob = new Blob([result], {type:'arraybuffer'});
+      anchor.href =  URL.createObjectURL(blob);
+      anchor.download = URL.createObjectURL(blob);
+      document.body.appendChild(anchor);
+      anchor.click();*/
+     //window.open(anchor.href);
+    
+        //}
+      
+    })
+    }
+  }
+
   
   public destroy(){
     this.router.navigate(['/login']);

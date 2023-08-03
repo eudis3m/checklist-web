@@ -4,11 +4,13 @@ import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import {RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { AssinaturaPage } from './assinatura.page';
+//import { SignaturePad} from 'angular2-signaturepad';
 import { SignaturePad } from 'angular5-signaturepad/signature-pad';
 
 @NgModule({
   declarations: [
     AssinaturaPage,
+    SignaturePad 
   ],
   imports: [
     CommonModule,
@@ -21,7 +23,6 @@ import { SignaturePad } from 'angular5-signaturepad/signature-pad';
         component: AssinaturaPage
       }
     ]),
-    SignaturePad
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,

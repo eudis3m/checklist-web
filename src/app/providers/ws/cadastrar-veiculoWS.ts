@@ -23,10 +23,17 @@ updateVeiculo:  UpdateVeiculo;
         return this.httpClient.put<UpdateVeiculo[]>(this.env.getHostURL()+ '/checklist/', updateVeiculo);
       }
 
-      public createVeiculoFoto(cadastrarVeiculo: CadastrarVeiculo, foto, foto_2, foto_3, foto_4, foto_5): Observable<CadastrarVeiculo[]>{
-        return this.httpClient.post<CadastrarVeiculo[]>(this.env.getHostURL()+ '/checklist/', cadastrarVeiculo +'/'+
-        '?foto=' + foto + '?foto_2=' + foto_2 + '?foto_3=' + foto_3 + '?foto_4=' + foto_4 + '?foto_5=' + foto_5 );
-      }
+      /*public createVeiculoFoto(cadastrarVeiculo: CadastrarVeiculo, foto, foto_2, foto_3, foto_4, foto_5, foto_6, foto_7,foto_8): Observable<CadastrarVeiculo[]>{
+        return this.httpClient.post<CadastrarVeiculo[]>(this.env.getHostURL()+ '/checklist/save', cadastrarVeiculo +
+        '?foto=' + foto + '?foto_2=' + foto_2 + '?foto_3=' + foto_3 + '?foto_4=' + foto_4 + '?foto_5=' + foto_5 +
+        + '?foto_6=' + foto_6 + '?foto_7=' + foto_7
+        + '?foto_8=' + foto_8)
+      }*/
+
+      /*public createVeiculoFoto(cadastrarVeiculo: CadastrarVeiculo, update: CadastrarVeiculo): Observable<CadastrarVeiculo[]>{
+        return this.httpClient.post<CadastrarVeiculo[]>(this.env.getHostURL()+ '/checklist/save', cadastrarVeiculo
+        )
+      }*/
 
       public createVeiculoCad(cadastrarVeiculo: CadastrarVeiculo): Observable<CadastrarVeiculo[]>{
         return this.httpClient.post<CadastrarVeiculo[]>(this.env.getHostURL()+ '/checklist/', cadastrarVeiculo );

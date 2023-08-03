@@ -1,5 +1,5 @@
 {
-  "name": "contabilidade",
+  "name": "CheckList",
   "version": "0.0.1",
   "author": "Ionic Framework",
   "homepage": "https://ionicframework.com/",
@@ -24,8 +24,9 @@
     "@angular/platform-browser": "~11.0.9",
     "@angular/platform-browser-dynamic": "~11.0.9",
     "@angular/router": "~11.0.9",
-    "@capacitor/android": "^2.4.7",
+    "@capacitor/android": "^2.5.0",
     "@capacitor/core": "^2.5.0",
+    "@ionic-native/camera-preview": "^5.36.0",
     "@ionic-native/core": "^5.31.1",
     "@ionic-native/in-app-browser": "^5.31.1",
     "@ionic-native/ionic-webview": "^5.32.1",
@@ -41,7 +42,6 @@
     "angular5-signaturepad": "^1.41.1",
     "br-mask": "0.0.10",
     "capacitor": "^0.5.5",
-    "cordova-android": "8.1.0",
     "cordova-browser": "6.0.0",
     "cordova-plugin-nativestorage": "^2.3.2",
     "cordova-sqlite-storage": "6.0.0",
@@ -78,7 +78,7 @@
     "@types/jasminewd2": "~2.0.8",
     "@types/node": "^14.14.31",
     "codelyzer": "^6.0.1",
-    "cordova": "^10.0.0",
+    "cordova": "^11.1.0",
     "cordova-plugin-device": "^2.0.3",
     "cordova-plugin-ionic-keyboard": "^2.2.0",
     "cordova-plugin-ionic-webview": "^5.0.0",
@@ -113,7 +113,6 @@
       "cordova-sqlite-storage": {}
     },
     "platforms": [
-      "android",
       "browser"
     ]
   }

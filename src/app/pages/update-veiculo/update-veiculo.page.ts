@@ -14,6 +14,8 @@ import {map, startWith} from 'rxjs/operators';
 import { CadastrarVeiculo  } from '../../model/cadastrar-veiculo';
 import { CadastrarVeiculoWS} from '../../providers/ws/cadastrar-veiculoWS';
 import { BrMaskModel } from 'br-mask';
+import { RelatorioVeiculoWS} from '../../providers/ws/relatorio-veiculoWS';
+import {Assinatura} from '../../model/assinatura';
 
 
 const { Camera } = Plugins;
@@ -35,7 +37,8 @@ export class UpdateVeiculoPage implements OnInit {
   updateAutoComplete : string[] =[];
   listaAutomovel ?: UpdateVeiculo[];
  filteredOptions: Observable<string[]>;
-  constructor( private spinner: NgxSpinnerService, private snotifyService: SnotifyService,
+  constructor(private relatorioveiculoWS: RelatorioVeiculoWS,
+     private spinner: NgxSpinnerService, private snotifyService: SnotifyService,
    private activatedRoute: ActivatedRoute,private formBuilder: FormBuilder, public updateVeiculoWS :UpdateVeiculoWS,
   private globalVars: GlobalVars, private router: Router, 
   public cadastrarVeiculoWS : CadastrarVeiculoWS/*@Inject(MAT_DIALOG_DATA) public data: any*/) {
@@ -74,6 +77,10 @@ export class UpdateVeiculoPage implements OnInit {
 this.Veiculo();
 
  this.placa();
+
+ if(this.updateVeiculo.assinatura_vistoriador != null){
+  this.updateVeiculo.placa = this.activatedRoute.snapshot.params['placa']
+ }
 
 
   }
@@ -274,6 +281,13 @@ this.Veiculo();
       roda_tras_dir:  [this.updateVeiculo.roda_tras_dir,  [Validators.required]],
       caminhao:  [this.updateVeiculo.caminhao,  [Validators.required]],
       tanque:  [this.updateVeiculo.tanque,  [Validators.required]],
+      pneus_status:  [this.updateVeiculo.pneus_status,  [Validators.required]],
+      combustivel:  [this.updateVeiculo.combustivel,  [Validators.required]],
+      observacao:  [this.updateVeiculo.observacao,  [Validators.required]],
+      email:  [this.updateVeiculo.email,  [Validators.required]],
+      assinatura_vistoriador :[this.updateVeiculo.assinatura_vistoriador = this.activatedRoute.snapshot.paramMap.get('assinatura_vistoriador')],
+      assinatura_policial: [this.updateVeiculo.assinatura_policial = this.activatedRoute.snapshot.paramMap.get('assinatura_policial')]
+  
     });
   }
    
@@ -393,14 +407,85 @@ this.Veiculo();
       this.updateVeiculo.roda_tras_dir = result['roda_tras_dir'],
       this.updateVeiculo.caminhao = result['caminhao'],
       this.updateVeiculo.tanque = result['tanque']
-  
+      this.updateVeiculo.combustivel = result['combustivel'],
+      this.updateVeiculo.caminhao = result['pneus_status'],
+      this.updateVeiculo.descricao = result['descricao']
         }
       }
   )
 
   );
           }
+
+          
+ public assinatura(){
+    this.router.navigate(['/assinatura', {'page': 1, 'placa': this.updateVeiculo.placa}]);
+    
+            
+   }
+
+   
+public GerarRelatorio() {
+  if(this.updateVeiculo != null){
+  //  let doc = new jsPDF();
+    return this.relatorioveiculoWS.findRelatorio(this.updateVeiculo.placa,this.updateVeiculo.email).subscribe(
+    result => {
+     /*try {
+      var file = new Blob([result], {type: 'arraybuffer'});
+        let tempUrl = URL.createObjectURL(file);
+         const aTag = document.createElement("a");
+         aTag.href = tempUrl;
+         aTag.download = result.replace(/^.*[\\\/]/, '');
+         document.body.appendChild(aTag);
+         aTag.click();
+         URL.revokeObjectURL(tempUrl);
+         aTag.remove();
+    
       
+     } catch (error) {
+      alert("Failed to download file!");
+     }*/
+    fetch(result,
+        {method: 'POST',
+        mode: 'cors',
+        headers: {'Content-Type': 'application/json; charset=UTF-8'}}).then(res => res.blob()).then(file => {
+       let tempUrl = URL.createObjectURL(file);
+        const aTag = document.createElement("a");
+        aTag.href = tempUrl;
+        aTag.download = result.replace(/^.*[\\\/]/, '');
+        document.body.appendChild(aTag);
+        aTag.click();
+        URL.revokeObjectURL(tempUrl);
+        aTag.remove();
+    }).catch(() => {
+        alert("Failed to download file!");
+    });
+      // if(result != null){
+
+      /* var file = new Blob([result], {type: 'arraybuffer'});
+        const url = window.URL.createObjectURL(file);
+      
+       window.open(url);
+
+       /*var a = document.createElement('a');
+     var blob = new Blob([result], {type:'arraybuffer'});
+     a.href = URL.createObjectURL(blob);
+      a.download = "filename.pdf";
+      a.click();
+      window.URL.revokeObjectURL(a.href);*/
+      /*var anchor = document.createElement('a');
+      var blob = new Blob([result], {type:'arraybuffer'});
+      anchor.href =  URL.createObjectURL(blob);
+      anchor.download = URL.createObjectURL(blob);
+      document.body.appendChild(anchor);
+      anchor.click();*/
+     //window.open(anchor.href);
+    
+        //}
+      
+    })
+    }
+  }
 
   public destroy(){
     this.router.navigate(['/login']);

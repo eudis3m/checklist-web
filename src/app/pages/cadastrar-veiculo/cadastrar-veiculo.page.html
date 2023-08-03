@@ -914,17 +914,47 @@
           <ion-select-option value="7">Impossível Vistoriar</ion-select-option>
         </ion-select>
       </ion-item>
-       <ion-item  *ngIf="this.cadastrarVeiculo.foto_5 == null"> 
-      <ion-slide  horizontal="center" align="center" :style="width: 70px; height: 70px; align: center;" [fullscreen]="true" [options]="slideOpts">
+      <ion-item>
+         <ion-label>Combustível</ion-label>
+        <ion-select formControlName="combustivel"  matInput [(ngModel)]="cadastrarVeiculo.combustivel">
+          <ion-select-option value="R">Reserva</ion-select-option>
+          <ion-select-option value="1/4">1/4</ion-select-option>
+          <ion-select-option value="1/2">1/2</ion-select-option>
+          <ion-select-option value="3/4">3/4</ion-select-option>
+          <ion-select-option value="C">Cheio</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+         <ion-label>Pneus Situação</ion-label>
+        <ion-select formControlName="pneus_status"  matInput [(ngModel)]="cadastrarVeiculo.pneus_status">
+          <ion-select-option value="N">Novo</ion-select-option>
+          <ion-select-option value="B">Bom</ion-select-option>
+          <ion-select-option value="R">Ruins</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-input  type="text" placeholder="descricao" 
+        formControlName="descricao"  matInput
+        [(ngModel)]="cadastrarVeiculo.descricao" ></ion-input>
+      </ion-item>
+      <ion-item lines="full" *ngIf="cadastrarveiculoEntity != null">
+        <ion-label position="floating">email</ion-label>
+        <ion-input type='text'  formControlName="email" matInput [(ngModel)]="cadastrarVeiculo.email"></ion-input>
+      </ion-item>
+
+       <ion-item  *ngIf="this.cadastrarVeiculo.foto_8 == null"  style="height: auto; width: auto;top: auto;"> 
+        <ion-content [fullscreen]="true" class="ion-padding">
         <img [src]="photo" *ngIf="photo">
-      <ion-fab vertical="bottom" align="center" horizontal="center" slot="fixed">
+      <ion-fab vertical="bottom"  horizontal="center" slot="fixed">
         <ion-fab-button  (click)="takePicture()">
           <ion-icon  name="camera"></ion-icon>
         </ion-fab-button>
       </ion-fab>
-    </ion-slide>
+    </ion-content>
      </ion-item>
-      <ion-button  class="botaoNovo"  type="submit"  >Cadastrar</ion-button>   <ion-button  class="botaoNovo"  routerLink='/camera' >Fotografar</ion-button>
+
+      <ion-button  class="botaoNovo"  type="submit"  >Cadastrar</ion-button>  
+      <ion-button  class="botaoNovo"  (click)="destroy()"  >Limpar</ion-button>  
     </ion-card-content>
   </ion-card>
 </form>

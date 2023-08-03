@@ -24,6 +24,12 @@ export interface UpdateMotocicleta{
     foto_4
     foto_5;
     empresa: string;
+    combustivel:string;
+    pneus_status:string;
+    descricao:string;
+    email: string;
+    assinatura_vistoriador: string;
+    assinatura_policial: string;
 
     uf: string;
     documento: string;

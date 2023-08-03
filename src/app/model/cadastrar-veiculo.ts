@@ -27,7 +27,16 @@ export interface CadastrarVeiculo{
     foto_3: string;
     foto_4: string;
     foto_5:string;
+    foto_6:string;
+    foto_7:string;
+    foto_8:string;
+    combustivel:string;
+    pneus_status:string;
+    descricao:string;
+    assinatura_vistoriador: string;
+    assinatura_policial: string;
     empresa: string;
+    email: string;
 
     uf: string;
     documento: string;

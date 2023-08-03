@@ -60,7 +60,7 @@
       </ion-item>
       
       <ion-item lines="full">
-      <ion-button  class="botaoNovo"  type="submit" >Cadastrar</ion-button>   <ion-button  class="botaoNovo"  routerLink='/assinatura' >Assinar</ion-button>
+      <ion-button  class="botaoNovo"  type="submit" >Cadastrar</ion-button>   <ion-button  class="botaoNovo" (click)="assinatura()" >Assinar</ion-button>
       <ion-item lines="full" *ngIf="relatorioVeiculo.placa != null">
         <ion-button  *ngIf="cadastrarveiculoEntity != null" class="botaoNovo"  (click)="GerarRelatorio()"  >Relatorio</ion-button>
          <!--ion-route *ngIf="GerarRelatorio() != null" routerLink='jsPDF'>
